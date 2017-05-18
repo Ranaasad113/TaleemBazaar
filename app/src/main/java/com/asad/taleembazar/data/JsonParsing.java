@@ -3,6 +3,7 @@ package com.asad.taleembazar.data;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -23,11 +24,11 @@ public class JsonParsing {
     private String mdescription;
     private String mprice;
     private HashMap<String,String> myhashmap=new HashMap<>();
-    public void jsonParse()
+    public void jsonParse(String query)
     {
         try {
             ConnectionHandler connectionHandler = new ConnectionHandler();
-            String json = connectionHandler.getJsonfromUrl();
+            String json = connectionHandler.getJsonfromUrl(query);
             JSONObject jsonObject = new JSONObject(json);
              mtype=jsonObject.getString(TAG_TYPE);
              mtitle=jsonObject.getString(TAG_TITLE);
@@ -69,6 +70,11 @@ public class JsonParsing {
 
     public HashMap<String, String> getMyhashmap() {
         return myhashmap;
+    }
+
+    public ArrayList<String> getAdIdentifiers(String particularType){
+        String json=ConnectionHandler.getJsonfromUrl(particularType);
+
     }
 
 }

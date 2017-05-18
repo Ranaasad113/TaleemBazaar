@@ -15,8 +15,8 @@ import java.net.URL;
  */
 
 public class ConnectionHandler {
-    private String mUrl="";
-    public String getJsonfromUrl() {
+
+    public static String getJsonfromUrl(String mUrl) {
         try {
         URL Url = new URL(mUrl);
         HttpURLConnection connection = (HttpURLConnection) Url.openConnection();
