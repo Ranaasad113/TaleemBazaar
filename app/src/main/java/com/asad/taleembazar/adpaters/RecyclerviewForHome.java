@@ -18,22 +18,6 @@ import java.util.ArrayList;
 
 import com.asad.taleembazar.activities.SecondActivity;
 import com.asad.taleembazar.activities.ThirdActivity;
-import com.asad.taleembazar.data.DataModelBooks;
-import com.asad.taleembazar.data.DataModelCars;
-import com.asad.taleembazar.data.DataModelElectronics;
-import com.asad.taleembazar.data.DataModelFashion;
-import com.asad.taleembazar.data.DataModelFlats;
-import com.asad.taleembazar.data.DataModelFurniture;
-import com.asad.taleembazar.data.DataModelMobiles;
-import com.asad.taleembazar.data.DataModelTransport;
-import com.asad.taleembazar.data.DataSourceBooks;
-import com.asad.taleembazar.data.DataSourceCar;
-import com.asad.taleembazar.data.DataSourceElectronics;
-import com.asad.taleembazar.data.DataSourceFashion;
-import com.asad.taleembazar.data.DataSourceFlats;
-import com.asad.taleembazar.data.DataSourceFurniture;
-import com.asad.taleembazar.data.DataSourceMobile;
-import com.asad.taleembazar.data.DataSourceTranport;
 
 
 /**
@@ -41,30 +25,7 @@ import com.asad.taleembazar.data.DataSourceTranport;
  */
 
 public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHome.Holder>{
-    private ArrayList<DataModelMobiles> arrayListMobile=new ArrayList<>();
-    private DataSourceMobile dataSourceMobile;
-    private DataModelMobiles[] dataModelMobiles=new DataModelMobiles[2];
-    private ArrayList<DataModelCars> arrayListCars=new ArrayList<>();
-    private DataSourceCar dataSourceCars;
-    private DataModelCars[] dataModelCar=new DataModelCars[2];
-    private ArrayList<DataModelFlats> arrayListFlats=new ArrayList<>();
-    private DataSourceFlats dataSourceFlats;
-    private DataModelFlats[] dataModelFlats=new DataModelFlats[2];
-    private ArrayList<DataModelTransport> arrayListTransport=new ArrayList<>();
-    private DataSourceTranport dataSourceTranport;
-    private DataModelTransport[] dataModelTransport=new DataModelTransport[2];
-    private ArrayList<DataModelBooks> arrayListBooks=new ArrayList<>();
-    private DataSourceBooks dataSourceBooks;
-    private DataModelBooks[] dataModelBooks=new DataModelBooks[2];
-    private ArrayList<DataModelFashion> arrayListFashion=new ArrayList<>();
-    private DataSourceFashion dataSourceFashion;
-    private DataModelFashion[] dataModelFashion=new DataModelFashion[2];
-    private ArrayList<DataModelFurniture> arrayListFurniture=new ArrayList<>();
-    private DataSourceFurniture dataSourceFurniture;
-    private DataModelFurniture[] dataModelFurniture=new DataModelFurniture[2];
-    private ArrayList<DataModelElectronics> arrayListElectronics=new ArrayList<>();
-    private DataSourceElectronics dataSourceElectronics;
-    private DataModelElectronics[] dataModelElectronics=new DataModelElectronics[2];
+
     private int i=0;
     private final int FIRSTCHECK=0;
     private  final int SECONDCHECK=1;
@@ -76,15 +37,6 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
     public RecyclerviewForHome(Context context)
     {
         this.context=context;
-        dataSourceMobile=new DataSourceMobile();
-        dataSourceCars=new DataSourceCar();
-        dataSourceFlats=new DataSourceFlats();
-        dataSourceTranport=new DataSourceTranport();
-        dataSourceBooks=new DataSourceBooks();
-        dataSourceFashion=new DataSourceFashion();
-        dataSourceFurniture=new DataSourceFurniture();
-        dataSourceElectronics=new DataSourceElectronics();
-          getArraylistDataSources();
 
 
     }
@@ -107,111 +59,13 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
     public void onBindViewHolder(RecyclerviewForHome.Holder holder, int position) {
         if(position<1 || position>=BOUND) return;
        if(position==1) {
-           holder.img1.setImageResource(dataModelCar[FIRSTCHECK].getImageCar());
-           holder.img2.setImageResource(dataModelCar[SECONDCHECK].getImageCar());
-           holder.tx1.setText(dataModelCar[FIRSTCHECK].getPriceCar());
-           holder.tx1.setTextColor(Color.parseColor("#E65100"));
-           holder.tx2.setText(dataModelCar[SECONDCHECK].getPriceCar());
-           holder.tx2.setTextColor(Color.parseColor("#E65100"));
-           holder.tx4.setText("Cars");
-           holder.tx4.setTypeface(null, Typeface.BOLD);
-           holder.tx3.setText("More Items");
-           holder.tx3.setTextColor(Color.parseColor("#2E7D32"));
+
 
         }
-       else if(position==2) {
-            holder.img1.setImageResource(dataModelMobiles[FIRSTCHECK].getImageMobile());
-            holder.img2.setImageResource(dataModelMobiles[SECONDCHECK].getImageMobile());
-            holder.tx1.setText(dataModelMobiles[FIRSTCHECK].getPriceMobile());
-            holder.tx1.setTextColor(Color.parseColor("#E65100"));
-            holder.tx2.setText(dataModelMobiles[SECONDCHECK].getPriceMobile());
-            holder.tx2.setTextColor(Color.parseColor("#E65100"));
-            holder.tx4.setText("Mobiles");
-            holder.tx4.setTypeface(null, Typeface.BOLD);
-            holder.tx3.setText("More Items");
-            holder.tx3.setTextColor(Color.parseColor("#2E7D32"));
 
-        }
-      else  if(position==3) {
-            holder.img1.setImageResource(dataModelFlats[FIRSTCHECK].getImageFlats());
-            holder.img2.setImageResource(dataModelFlats[SECONDCHECK].getImageFlats());
-            holder.tx1.setText(dataModelFlats[FIRSTCHECK].getPriceFlats());
-            holder.tx1.setTextColor(Color.parseColor("#E65100"));
-            holder.tx2.setText(dataModelFlats[SECONDCHECK].getPriceFlats());
-            holder.tx2.setTextColor(Color.parseColor("#E65100"));
-            holder.tx4.setText("Flats");
-            holder.tx4.setTypeface(null, Typeface.BOLD);
-            holder.tx3.setText("More Items");
-            holder.tx3.setTextColor(Color.parseColor("#2E7D32"));
-
-        }
-       else if(position==4) {
-            holder.img1.setImageResource(dataModelTransport[FIRSTCHECK].getImageTranport());
-            holder.img2.setImageResource(dataModelTransport[SECONDCHECK].getImageTranport());
-            holder.tx1.setText(dataModelTransport[FIRSTCHECK].getPriceTranport());
-            holder.tx1.setTextColor(Color.parseColor("#E65100"));
-            holder.tx2.setText(dataModelTransport[SECONDCHECK].getPriceTranport());
-            holder.tx2.setTextColor(Color.parseColor("#E65100"));
-            holder.tx4.setText("Transport");
-            holder.tx4.setTypeface(null, Typeface.BOLD);
-            holder.tx3.setText("More Items");
-            holder.tx3.setTextColor(Color.parseColor("#2E7D32"));
-
-        }
-        else if(position==5) {
-            holder.img1.setImageResource(dataModelBooks[FIRSTCHECK].getImageBooks());
-            holder.img2.setImageResource(dataModelBooks[SECONDCHECK].getImageBooks());
-            holder.tx1.setText(dataModelBooks[FIRSTCHECK].getPriceBooks());
-            holder.tx1.setTextColor(Color.parseColor("#E65100"));
-            holder.tx2.setText(dataModelBooks[SECONDCHECK].getPriceBooks());
-            holder.tx2.setTextColor(Color.parseColor("#E65100"));
-            holder.tx4.setText("Books");
-            holder.tx4.setTypeface(null, Typeface.BOLD);
-            holder.tx3.setText("More Items");
-            holder.tx3.setTextColor(Color.parseColor("#2E7D32"));
-
-        }
-       else if(position==6) {
-           holder.img1.setImageResource(dataModelFashion[FIRSTCHECK].getImageFashion());
-           holder.img2.setImageResource(dataModelFashion[SECONDCHECK].getImageFashion());
-           holder.tx1.setText(dataModelFashion[FIRSTCHECK].getPriceFashion());
-           holder.tx1.setTextColor(Color.parseColor("#E65100"));
-           holder.tx2.setText(dataModelFashion[SECONDCHECK].getPriceFashion());
-           holder.tx2.setTextColor(Color.parseColor("#E65100"));
-           holder.tx4.setText("Fashion");
-           holder.tx4.setTypeface(null, Typeface.BOLD);
-           holder.tx3.setText("More Items");
-           holder.tx3.setTextColor(Color.parseColor("#2E7D32"));
-
-       }
-       else if(position==7) {
-           holder.img1.setImageResource(dataModelFurniture[FIRSTCHECK].getImageFurniture());
-           holder.img2.setImageResource(dataModelFurniture[SECONDCHECK].getImageFurniture());
-           holder.tx1.setText(dataModelFurniture[FIRSTCHECK].getPriceFurniture());
-           holder.tx1.setTextColor(Color.parseColor("#E65100"));
-           holder.tx2.setText(dataModelFurniture[SECONDCHECK].getPriceFurniture());
-           holder.tx2.setTextColor(Color.parseColor("#E65100"));
-           holder.tx4.setText("Furniture");
-           holder.tx4.setTypeface(null, Typeface.BOLD);
-           holder.tx3.setText("More Items");
-           holder.tx3.setTextColor(Color.parseColor("#2E7D32"));
-
-       }
-       else if(position==8) {
-           holder.img1.setImageResource(dataModelElectronics[FIRSTCHECK].getImageElectronics());
-           holder.img2.setImageResource(dataModelElectronics[SECONDCHECK].getImageElectronics());
-           holder.tx1.setText(dataModelElectronics[FIRSTCHECK].getPriceElectronics());
-           holder.tx1.setTextColor(Color.parseColor("#E65100"));
-           holder.tx2.setText(dataModelElectronics[SECONDCHECK].getPriceElectronics());
-           holder.tx2.setTextColor(Color.parseColor("#E65100"));
-           holder.tx4.setText("Electronics");
-           holder.tx4.setTypeface(null, Typeface.BOLD);
-           holder.tx3.setText("More Items");
-           holder.tx3.setTextColor(Color.parseColor("#2E7D32"));
 
        }
 
-    }
     @Override
     public int getItemCount() {
         return BOUND;
@@ -315,45 +169,4 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
 
         }
     }
-    public void getArraylistDataSources()
-    {
-        arrayListMobile=dataSourceMobile.getDataModelMobilesArrayList();
-        dataModelMobiles[FIRSTCHECK]=arrayListMobile.get(FIRSTCHECK);
-        dataModelMobiles[SECONDCHECK]=arrayListMobile.get(SECONDCHECK);
-        //
-       arrayListCars=dataSourceCars.getDataModelCarsArrayList();
-       dataModelCar[FIRSTCHECK]=arrayListCars.get(FIRSTCHECK);
-       dataModelCar[SECONDCHECK]=arrayListCars.get(SECONDCHECK);
-        //
-        arrayListFlats=dataSourceFlats.getDataModelFlatsArrayList();
-        dataModelFlats[FIRSTCHECK]=arrayListFlats.get(FIRSTCHECK);
-        dataModelFlats[SECONDCHECK]=arrayListFlats.get(SECONDCHECK);
-        //
-        arrayListTransport=dataSourceTranport.getDataModelTransportArrayList();
-        dataModelTransport[FIRSTCHECK]=arrayListTransport.get(FIRSTCHECK);
-        dataModelTransport[SECONDCHECK]=arrayListTransport.get(SECONDCHECK);
-        //
-        arrayListBooks=dataSourceBooks.getDataModelBooksArrayList();
-        dataModelBooks[FIRSTCHECK]=arrayListBooks.get(FIRSTCHECK);
-        dataModelBooks[SECONDCHECK]=arrayListBooks.get(SECONDCHECK);
-        //
-        arrayListFashion=dataSourceFashion.getDataModelFashionArrayList();
-        dataModelFashion[FIRSTCHECK]=arrayListFashion.get(FIRSTCHECK);
-        dataModelFashion[SECONDCHECK]=arrayListFashion.get(SECONDCHECK);
-        //
-        arrayListFurniture=dataSourceFurniture.getDataModelFurnitureArrayList();
-        dataModelFurniture[FIRSTCHECK]=arrayListFurniture.get(FIRSTCHECK);
-        dataModelFurniture[SECONDCHECK]=arrayListFurniture.get(SECONDCHECK);
-        //
-        arrayListElectronics=dataSourceElectronics.getDataModelElectronicsArrayList();
-        dataModelElectronics[FIRSTCHECK]=arrayListElectronics.get(FIRSTCHECK);
-        dataModelElectronics[SECONDCHECK]=arrayListElectronics.get(SECONDCHECK);
-
-
-}
-
-
-
-
-
 }

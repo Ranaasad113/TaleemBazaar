@@ -147,7 +147,7 @@ public class SecondActivity extends AppCompatActivity implements FirstFragment.C
     }
 
     private void setCircleMenu() {//In this Method the Circle Menu is set
-        circleMenu.setMainMenu(Color.TRANSPARENT, R.drawable.camerra_for_pr0filepic, R.drawable.camerra_for_pr0filepic);
+        circleMenu.setMainMenu(Color.TRANSPARENT, R.drawable.camera_icon_for_submitadds, R.drawable.camera_icon_for_submitadds);
         circleMenu.addSubMenu(Color.parseColor("#258CFF"), R.drawable.camera_icon_for_submitadds)
                 .addSubMenu(Color.parseColor("#30A400"), R.drawable.image_gallery_icon);
         circleMenu.setOnMenuSelectedListener(new OnMenuSelectedListener() {
