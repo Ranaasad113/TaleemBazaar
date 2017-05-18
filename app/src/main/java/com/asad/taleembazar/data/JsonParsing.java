@@ -11,6 +11,8 @@ import java.util.Iterator;
  */
 
 public class JsonParsing {
+    private String buildjson="{\"type\":\"car\",\"title\":\"fuckfuck\",\"description\":\"motherfucker\",\"price\":\"130\"," +
+            "\"properties\":[\"company\":\"honda\",\"model\":\"1925\"]}";
     private static final String TAG_TYPE="type";
     private static  final String TAG_TITLE="title";
     private static final String TAG_DESCRIPTION="description";
