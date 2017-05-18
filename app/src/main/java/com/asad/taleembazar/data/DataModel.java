@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
+ *
  * Created by asad on 5/18/17.
+ *
  */
 
 public class DataModel {
@@ -13,15 +15,18 @@ public class DataModel {
     private String mPrice;
     private String mDescription;
     private HashMap<String,String> mProperties=new HashMap<>();
-
-    public DataModel(String mType, String mTitle, String mPrice, String mDescription, HashMap<String,String> mProperties) {
+    private String mImagesUrl;
+    public DataModel(String mImagesUrl, String mType, String mTitle, String mPrice, String mDescription, HashMap<String,String> mProperties) {
+        this.mImagesUrl=mImagesUrl;
         this.mType = mType;
         this.mTitle = mTitle;
         this.mPrice = mPrice;
         this.mDescription = mDescription;
         this.mProperties = mProperties;
     }
-
+    public String getmImagesUrl() {
+        return mImagesUrl;
+    }
     public String getmType() {
         return mType;
     }

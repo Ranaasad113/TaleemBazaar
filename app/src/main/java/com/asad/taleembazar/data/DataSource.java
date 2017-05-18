@@ -1,9 +1,12 @@
 package com.asad.taleembazar.data;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.concurrent.Executor;
 
 /**
  * Created by asad on 5/18/17.
@@ -13,17 +16,43 @@ import java.util.HashMap;
 public class DataSource {
     private HashMap<String,ArrayList<DataModel>> myHashmap=new HashMap<>();
 
-    public void fillData(final String query){
+    public void fillData(final String query,final String catagory){
 
         class FillTask extends AsyncTask<Void,Void,Boolean>{
 
             @Override
             protected Boolean doInBackground(Void... params) {
-                JsonParsing parsing=new JsonParsing();
-                parsing.jsonParse(query);
+               ServerHandler serverHandler=new ServerHandler();
+                DataModel dataModel;
 
+                ArrayList<String> ids;
+                try {
+                    ids=serverHandler.idsUrl(query);
+                    ArrayList<DataModel> arrayList=new ArrayList<>();
+                    for (int i = 0; i <ids.size();i++) {
+                        Log.d(catagory, "doInBackground: url is: "+query+"&id="+ids.get(i));
+                        dataModel = serverHandler.addsUrl(query +"&id="+ ids.get(i));
+                        arrayList.add(dataModel);
+                    }
+                    myHashmap.put(catagory,arrayList);
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Boolean aBoolean) {
+                Iterator<String> iterator=myHashmap.keySet().iterator();
+                while (iterator.hasNext()){
+                    String key=iterator.next();
+                    Log.d(key, "onPostExecute: "+myHashmap.get(key).size());
+                }
             }
         }
-
+            new FillTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 }

@@ -33,7 +33,8 @@ public class ConnectionHandler {
         sb.delete(0, sb.length());
         return line;
     } catch (Exception e) {
-        return null;
+        e.printStackTrace();
+            return e.getLocalizedMessage();
     }
 }
     }

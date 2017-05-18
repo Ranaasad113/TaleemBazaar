@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.asad.taleembazar.R;
 import com.asad.taleembazar.adpaters.RecyclerviewForHome;
+import com.asad.taleembazar.data.DataSourceWrapper;
 
 import java.util.ArrayList;
 
@@ -38,10 +39,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        initializeSources();
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         submitaddbutton=(FloatingActionButton)findViewById(R.id.submitadd_toggle_button);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -146,6 +146,12 @@ public class MainActivity extends AppCompatActivity
         Intent intent=new Intent(this,SecondActivity.class);
         intent.putExtra("Check","For SubmitAdd");
         startActivity(intent);
+    }
+    private void initializeSources()
+    { ArrayList<String> arrayList=new ArrayList<>();
+        arrayList.add("car");
+        arrayList.add("mobiles");
+        DataSourceWrapper.initDatasources(arrayList);
     }
 
 }
