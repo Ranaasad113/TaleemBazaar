@@ -25,7 +25,7 @@ import com.asad.taleembazar.adpaters.RecyclerAdpaterCategories;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FirstFragment extends Fragment implements View.OnClickListener {
+public class RegisterFragment extends Fragment implements View.OnClickListener {
     public interface Communication {
         public void accept(int i);
     }
@@ -40,7 +40,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private static Context CONTEXT;
     private static String TYPE;
 
-    public FirstFragment() {
+
+    public RegisterFragment() {
         // Required empty public constructor
     }
 
@@ -50,30 +51,12 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-       if(VALUE==4219) {
             View view = inflater.inflate(R.layout.layout_for_register, container, false);
             btn = (Button) view.findViewById(R.id.next_btn_for_register);
             btn.setOnClickListener(this);
             toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_fragment);
             toolbar.setTitle("Register");
             return view;
-        }
-        else if(VALUE==4218)
-        {
-            View view = inflater.inflate(R.layout.select_categories_from_hometextview, container, false);
-            RecyclerView recyclerViewforsubmitadd = (RecyclerView)view.findViewById(R.id.recyclerview_for_categories);
-            layoutManager = new LinearLayoutManager(CONTEXT);
-            recyclerViewforsubmitadd.setLayoutManager(layoutManager);
-            recyclerViewforsubmitadd.setHasFixedSize(true);
-            adapter = new RecyclerAdpaterCategories(TYPE);
-            recyclerViewforsubmitadd.setAdapter(adapter);
-            toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_third);
-            toolbar.setTitle("Select Category");
-            return view;
-
-
-        }
-        return null;
     }
     @Override
     public void onAttach(Activity a) {

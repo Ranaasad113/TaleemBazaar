@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/appbar_complete_layout"
     android:fitsSystemWindows="true"
-    tools:context="com.asad.taleembazar.activities.MainActivity">
+    tools:context="com.asad.taleembazar.activities.HomeActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

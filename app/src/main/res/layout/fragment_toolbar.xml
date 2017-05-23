@@ -11,7 +11,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/coordinatelayout"
     android:fitsSystemWindows="true"
-    tools:context="com.asad.taleembazar.activities.MainActivity">
+    tools:context="com.asad.taleembazar.activities.HomeActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

@@ -5,7 +5,7 @@
     android:id="@+id/activity_third"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.asad.taleembazar.activities.ThirdActivity">
+    tools:context="com.asad.taleembazar.activities.SelectCategoriesActivity">
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/coordinatelayout"
         android:fitsSystemWindows="true"
-        tools:context="com.asad.taleembazar.activities.MainActivity">
+        tools:context="com.asad.taleembazar.activities.HomeActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

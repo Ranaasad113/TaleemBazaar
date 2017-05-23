@@ -1,23 +1,17 @@
 package com.asad.taleembazar.adpaters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.asad.taleembazar.R;
-import java.util.ArrayList;
 
-import com.asad.taleembazar.activities.SecondActivity;
-import com.asad.taleembazar.activities.ThirdActivity;
+import com.asad.taleembazar.activities.SelectCategoriesActivity;
 
 
 /**
@@ -85,7 +79,7 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
         TextView tx1,tx2,tx3,tx4;
         TextView tx1cat,tx2cat,tx3cat,tx4cat,tx5cat,tx6cat,tx7cat,tx8cat;
         Context con=itemView.getContext();
-        Intent intent=new Intent(con,ThirdActivity.class);
+        Intent intent=new Intent(con,SelectCategoriesActivity.class);
         public Holder(final View itemView, int viewType) {
             super(itemView);
             if(viewType==FIRST_VIEW)

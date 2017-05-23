@@ -21,4 +21,9 @@ public class DataSourceWrapper {
 
         }
     }
+    public DataSource getDataSource(String Category)
+    {
+        DataSource dataSource=datasorces.get(Category);
+        return dataSource;
+    }
 }

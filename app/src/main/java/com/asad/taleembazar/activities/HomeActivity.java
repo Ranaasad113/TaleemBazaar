@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 
 
-public class MainActivity extends AppCompatActivity
+public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static NavigationView navigationView ;
     private  DrawerLayout drawer;
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity
         switch (id)
         {
             case R.id.nav_myaccount:
-                Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
+                Intent intent=new Intent(getApplicationContext(),MyAccountActivity.class);
                 intent.putExtra("Check","From My Account");
                 startActivity(intent);
                 break;
@@ -123,8 +123,7 @@ public class MainActivity extends AppCompatActivity
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
-                intent.putExtra("Check","From Sign In");
+               Intent intent=new Intent(getApplicationContext(),SignInActivity.class);
               startActivity(intent);
             }
         });
@@ -143,8 +142,7 @@ public class MainActivity extends AppCompatActivity
     }
     private void submitAdd()
     {
-        Intent intent=new Intent(this,SecondActivity.class);
-        intent.putExtra("Check","For SubmitAdd");
+        Intent intent=new Intent(this,SubmitAddActivity.class);
         startActivity(intent);
     }
     private void initializeSources()

@@ -55,4 +55,8 @@ public class DataSource {
         }
             new FillTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
+    public HashMap<String,ArrayList<DataModel>> getDataModels()
+    {
+        return myHashmap;
+    }
 }
