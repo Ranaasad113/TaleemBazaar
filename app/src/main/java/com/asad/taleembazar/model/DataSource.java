@@ -1,12 +1,13 @@
-package com.asad.taleembazar.data;
+package com.asad.taleembazar.model;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.asad.taleembazar.networking.ServerHandler;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.concurrent.Executor;
 
 /**
  * Created by asad on 5/18/17.

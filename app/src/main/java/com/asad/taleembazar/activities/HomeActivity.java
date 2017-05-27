@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.asad.taleembazar.R;
 import com.asad.taleembazar.adpaters.RecyclerviewForHome;
-import com.asad.taleembazar.data.DataSourceWrapper;
+import com.asad.taleembazar.model.DataSourceWrapper;
 
 import java.util.ArrayList;
 

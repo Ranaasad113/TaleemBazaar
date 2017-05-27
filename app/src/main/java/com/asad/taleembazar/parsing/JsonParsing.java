@@ -1,4 +1,6 @@
-package com.asad.taleembazar.data;
+package com.asad.taleembazar.parsing;
+
+import com.asad.taleembazar.model.DataModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

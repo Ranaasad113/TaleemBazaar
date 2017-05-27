@@ -1,6 +1,9 @@
-package com.asad.taleembazar.data;
+package com.asad.taleembazar.networking;
 
 import android.util.Log;
+
+import com.asad.taleembazar.model.DataModel;
+import com.asad.taleembazar.parsing.JsonParsing;
 
 import java.util.ArrayList;
 

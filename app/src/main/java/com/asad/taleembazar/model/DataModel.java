@@ -1,6 +1,5 @@
-package com.asad.taleembazar.data;
+package com.asad.taleembazar.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**

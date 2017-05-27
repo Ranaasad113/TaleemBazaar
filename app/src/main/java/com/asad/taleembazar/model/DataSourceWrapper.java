@@ -1,4 +1,7 @@
-package com.asad.taleembazar.data;
+package com.asad.taleembazar.model;
+
+import com.asad.taleembazar.CommonConstant;
+import com.asad.taleembazar.model.DataSource;
 
 import java.util.ArrayList;
 import java.util.HashMap;

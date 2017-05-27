@@ -1,4 +1,4 @@
-package com.asad.taleembazar.data;
+package com.asad.taleembazar;
 
 /**
  *
