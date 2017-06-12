@@ -16,6 +16,7 @@ import java.util.Iterator;
 
 public class DataSource {
     private HashMap<String,ArrayList<DataModelAdds>> myHashmap=new HashMap<>();
+    private DataModelUser mdataModelUser;
 
     public void fillData(final String query,final String catagory){
 
@@ -55,19 +56,33 @@ public class DataSource {
         }
             new FillTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
-    public HashMap<String,ArrayList<DataModelAdds>> getDataModels()
-    {
-        return myHashmap;
-    }
-    public void getUserData(String query)
+    public void getUserData(final String query)
     {
         class UseData extends AsyncTask<Void,Void,Boolean> {
             @Override
             protected Boolean doInBackground(Void... params) {
+                ServerHandler serverHandler=new ServerHandler();
+                try {
+                    mdataModelUser=serverHandler.userUrl(query);
+                }
+                catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                    return false;
+                }
                 return null;
             }
         }
+        new UseData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
+    public HashMap<String,ArrayList<DataModelAdds>> getDataModels()
+    {
+        return myHashmap;
+    }
+    public DataModelUser getDatamodeluser()
+    {
+        return mdataModelUser;
+    }
 
     }
 
