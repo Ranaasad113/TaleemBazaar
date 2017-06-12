@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 public class DataSourceWrapper {
     private static HashMap<String,DataSource> datasorces=new HashMap<>();
+    private static DataSource datasource;
     public static void  initDatasources(ArrayList<String> category)
     {
         for (String cat:category
@@ -24,9 +25,19 @@ public class DataSourceWrapper {
 
         }
     }
-    public DataSource getDataSource(String Category)
+    public static void initUserDatasources(String username)
+    {
+        datasource=new DataSource();
+        datasource.getUserData(CommonConstant.URL+"?username="+username);
+
+    }
+    public DataSource getAddsDataSource(String Category)
     {
         DataSource dataSource=datasorces.get(Category);
         return dataSource;
+    }
+    public DataSource getUserDatasource()
+    {
+        return datasource;
     }
 }

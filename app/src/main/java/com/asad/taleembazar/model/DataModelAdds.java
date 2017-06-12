@@ -8,14 +8,14 @@ import java.util.HashMap;
  *
  */
 
-public class DataModel {
+public class DataModelAdds {
     private String mType;
     private String mTitle;
     private String mPrice;
     private String mDescription;
     private HashMap<String,String> mProperties=new HashMap<>();
     private String mImagesUrl;
-    public DataModel(String mImagesUrl, String mType, String mTitle, String mPrice, String mDescription, HashMap<String,String> mProperties) {
+    public DataModelAdds(String mImagesUrl, String mType, String mTitle, String mPrice, String mDescription, HashMap<String,String> mProperties) {
         this.mImagesUrl=mImagesUrl;
         this.mType = mType;
         this.mTitle = mTitle;

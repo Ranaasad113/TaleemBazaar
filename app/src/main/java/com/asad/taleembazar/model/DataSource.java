@@ -15,7 +15,7 @@ import java.util.Iterator;
  */
 
 public class DataSource {
-    private HashMap<String,ArrayList<DataModel>> myHashmap=new HashMap<>();
+    private HashMap<String,ArrayList<DataModelAdds>> myHashmap=new HashMap<>();
 
     public void fillData(final String query,final String catagory){
 
@@ -24,16 +24,15 @@ public class DataSource {
             @Override
             protected Boolean doInBackground(Void... params) {
                ServerHandler serverHandler=new ServerHandler();
-                DataModel dataModel;
-
+                DataModelAdds dataModelAdds;
                 ArrayList<String> ids;
                 try {
                     ids=serverHandler.idsUrl(query);
-                    ArrayList<DataModel> arrayList=new ArrayList<>();
+                    ArrayList<DataModelAdds> arrayList=new ArrayList<>();
                     for (int i = 0; i <ids.size();i++) {
                         Log.d(catagory, "doInBackground: url is: "+query+"&id="+ids.get(i));
-                        dataModel = serverHandler.addsUrl(query +"&id="+ ids.get(i));
-                        arrayList.add(dataModel);
+                        dataModelAdds = serverHandler.addsUrl(query +"&id="+ ids.get(i));
+                        arrayList.add(dataModelAdds);
                     }
                     myHashmap.put(catagory,arrayList);
                     return true;
@@ -56,8 +55,19 @@ public class DataSource {
         }
             new FillTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
-    public HashMap<String,ArrayList<DataModel>> getDataModels()
+    public HashMap<String,ArrayList<DataModelAdds>> getDataModels()
     {
         return myHashmap;
     }
-}
+    public void getUserData(String query)
+    {
+        class UseData extends AsyncTask<Void,Void,Boolean> {
+            @Override
+            protected Boolean doInBackground(Void... params) {
+                return null;
+            }
+        }
+        }
+
+    }
+

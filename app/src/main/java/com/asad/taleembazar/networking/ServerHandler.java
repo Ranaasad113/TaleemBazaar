@@ -2,7 +2,8 @@ package com.asad.taleembazar.networking;
 
 import android.util.Log;
 
-import com.asad.taleembazar.model.DataModel;
+import com.asad.taleembazar.model.DataModelAdds;
+import com.asad.taleembazar.model.DataModelUser;
 import com.asad.taleembazar.parsing.JsonParsing;
 
 import java.util.ArrayList;
@@ -15,15 +16,23 @@ import java.util.ArrayList;
 
 public class ServerHandler {
     private String mJson;
+    private String mJsonuser;
     private static final String TAG=ServerHandler.class.getCanonicalName();
     private JsonParsing mJsonParsing=new JsonParsing();
-    public DataModel addsUrl(String query) throws Exception
+    public DataModelAdds addsUrl(String query) throws Exception
     {
-        DataModel dataModel;
+        DataModelAdds dataModelAdds;
         mJson=ConnectionHandler.getJsonfromUrl(query);
         Log.d(TAG, "addsUrl: json is: "+mJson);
-        dataModel=mJsonParsing.parseAdJson(mJson);
-        return dataModel;
+        dataModelAdds =mJsonParsing.parseAdJson(mJson);
+        return dataModelAdds;
+    }
+    public DataModelUser userUrl(String query) throws Exception
+    {
+        DataModelUser dataModelUser=null;
+        mJsonuser=ConnectionHandler.getJsonfromUrl(query);
+        return dataModelUser;
+
     }
     public ArrayList<String> idsUrl(String query) throws Exception
     {

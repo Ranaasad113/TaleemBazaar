@@ -1,6 +1,7 @@
 package com.asad.taleembazar.parsing;
 
-import com.asad.taleembazar.model.DataModel;
+import com.asad.taleembazar.model.DataModelAdds;
+import com.asad.taleembazar.model.DataModelUser;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,9 +25,14 @@ public class JsonParsing {
     private static final String TAG_DESCRIPTION="description";
     private static final String TAG_PRICE="price";
     private static final String TAG_PROPERTIES="properties";
+    private static final String TAG_USER_IMAGE_URL="img";
+    private static final String TAG_USERNAME="username";
+    private static final String TAG_PHONE_NO="phoneno";
+    private static  final String TAG_PASSWORD="password";
     private HashMap<String,String> myhashmap=new HashMap<>();
-    private DataModel mDataModel;
-    public DataModel parseAdJson(String json) throws Exception
+    private DataModelAdds mDataModelAdds;
+    private DataModelUser mDataModelUser;
+    public DataModelAdds parseAdJson(String json) throws Exception
     {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray jsonArray=jsonObject.getJSONArray(TAG_PROPERTIES);
@@ -42,7 +48,7 @@ public class JsonParsing {
 
                 }
             }
-         return mDataModel=new DataModel(jsonObject.getString(TAG_IMAGE_URL),jsonObject.getString(TAG_TYPE)
+         return mDataModelAdds =new DataModelAdds(jsonObject.getString(TAG_IMAGE_URL),jsonObject.getString(TAG_TYPE)
                  ,jsonObject.getString(TAG_TITLE), jsonObject.getString(TAG_DESCRIPTION),
                  jsonObject.getString(TAG_PRICE),myhashmap);
 
@@ -64,6 +70,12 @@ public class JsonParsing {
 
             }
             return arrayList;
+        }
+        public DataModelUser parseUserjson(String json) throws  Exception
+        {
+            JSONObject jsonObj=new JSONObject(json);
+           return mDataModelUser=new DataModelUser(jsonObj.getString(TAG_USERNAME),jsonObj.getString(TAG_USER_IMAGE_URL),jsonObj.getString(TAG_PASSWORD),jsonObj.getString(TAG_PHONE_NO));
+
         }
     }
 
