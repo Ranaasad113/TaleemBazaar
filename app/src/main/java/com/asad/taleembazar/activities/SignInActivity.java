@@ -15,7 +15,7 @@ public class SignInActivity extends AppCompatActivity implements RegisterFragmen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.sign_in_layout);
         mToolbar = (Toolbar) findViewById(R.id.toolbar_fragment);
         settingToolbar();//Here's Toolbar of that Activity Set
         TextView no_account = (TextView) findViewById(R.id.no_account_register_textview);

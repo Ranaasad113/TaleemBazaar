@@ -28,7 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
-        <TextView android:layout_width="match_parent"
+        <TextView
+            android:layout_width="match_parent"
             android:id="@+id/textview_for_cardview_list"
             android:layout_height="wrap_content"
             android:text="account"

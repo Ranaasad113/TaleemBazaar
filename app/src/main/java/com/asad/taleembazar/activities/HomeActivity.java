@@ -53,6 +53,7 @@ public class HomeActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
         textviewOfHeader();
         homeItems();
+     //rana arslan
         submitaddbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
