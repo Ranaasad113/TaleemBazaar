@@ -17,8 +17,8 @@ public class DataSourceWrapper {
     private static DataSource datasource;
     public static void  initDatasources(ArrayList<String> category)
     {
-        for (String cat:category
-             ) {
+        for (String cat:category)
+        {
             DataSource temp=new DataSource();
             temp.fillData(CommonConstant.URL+"?type="+cat,cat);
             datasorces.put(cat,temp);
