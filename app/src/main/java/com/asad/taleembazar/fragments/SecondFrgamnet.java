@@ -32,7 +32,7 @@ import java.net.URLEncoder;
  *
  */
 public class SecondFrgamnet extends Fragment {
-
+//partial registeration without email done
 public EditText email,password;
    public Button btn;
     String value;
