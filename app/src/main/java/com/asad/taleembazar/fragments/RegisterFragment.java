@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.asad.taleembazar.R;
@@ -39,6 +40,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private RecyclerView.LayoutManager layoutManager;
     private static Context CONTEXT;
     private static String TYPE;
+    private EditText fname,lname;
 
 
     public RegisterFragment() {
@@ -52,7 +54,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
         // Inflate the layout for this fragment
             View view = inflater.inflate(R.layout.layout_for_register, container, false);
-            btn = (Button) view.findViewById(R.id.next_btn_for_register);
+        fname=(EditText)view.findViewById(R.id.first_name_register_edittext);
+        lname=(EditText)view.findViewById(R.id.last_name_register_edittext);
+        btn = (Button) view.findViewById(R.id.next_btn_for_register);
             btn.setOnClickListener(this);
             toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_fragment);
             toolbar.setTitle("Register");
@@ -70,10 +74,19 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         SecondFrgamnet fragmentscend=new SecondFrgamnet();
-        fragmentTransaction.replace(R.id.coordinatelayout, fragmentscend);
-        fragmentTransaction.addToBackStack("Fragment_2");
-        fragmentTransaction.commit();
+        if(fname.getText().toString().isEmpty() && lname.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(),"Please Specify Firstname and Lastname",Toast.LENGTH_LONG).show();
+        }
+        else {
+            String a = fname.getText().toString() + " " + lname.getText().toString();
+            Bundle args = new Bundle();
+            args.putString("Name", a);
+            fragmentscend.setArguments(args);
+            fragmentTransaction.replace(R.id.coordinatelayout, fragmentscend);
+            fragmentTransaction.addToBackStack("Fragment_2");
+            fragmentTransaction.commit();
 
+        }
     }
     public void acceptValueActivity(int value, Context context,String type)
     {   VALUE=0;
