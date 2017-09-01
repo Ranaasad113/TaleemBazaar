@@ -27,13 +27,12 @@
         android:clickable="true"
         android:id="@+id/choose_category_textview"
        />
-    <TextView
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:layout_marginBottom="10dp"
         android:textSize="20dp"
-        android:text="Choose a Category of your item"
         android:clickable="true"
         android:drawableEnd="@drawable/drop_down_arrow_24dp"
         android:id="@+id/choose_category_textview_clickable"
