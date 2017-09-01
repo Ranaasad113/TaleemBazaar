@@ -29,7 +29,7 @@ public class SelectCategoriesActivity extends AppCompatActivity implements Regis
         setContentView(R.layout.select_categories_from_hometextview);
         int value=4218;
         Intent intent=getIntent();
-        String type=intent.getStringExtra("Check");
+        String type=intent.getStringExtra("PictureUploadingforMAC");
         toolbar = (Toolbar) findViewById(R.id.toolbar_third);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Select Category");

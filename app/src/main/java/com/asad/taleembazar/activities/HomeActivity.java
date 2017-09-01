@@ -110,7 +110,7 @@ public class HomeActivity extends AppCompatActivity
         {
             case R.id.nav_myaccount:
             {Intent intent=new Intent(getApplicationContext(),MyAccountActivity.class);
-                intent.putExtra("Check","From My Account");
+                intent.putExtra("PictureUploadingforMAC","From My Account");
                 startActivity(intent);
                 break;}
 

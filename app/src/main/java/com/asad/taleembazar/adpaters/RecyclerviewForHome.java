@@ -94,56 +94,56 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
             tx1cat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    intent.putExtra("Check","Cars");
+                    intent.putExtra("PictureUploadingforMAC","Cars");
                     con.startActivity(intent);
                 }
             });
                 tx2cat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        intent.putExtra("Check","Mobiles");
+                        intent.putExtra("PictureUploadingforMAC","Mobiles");
                         con.startActivity(intent);
                     }
                 });
                 tx3cat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        intent.putExtra("Check","Flats");
+                        intent.putExtra("PictureUploadingforMAC","Flats");
                         con.startActivity(intent);
                     }
                 });
                 tx4cat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        intent.putExtra("Check","Transport");
+                        intent.putExtra("PictureUploadingforMAC","Transport");
                         con.startActivity(intent);
                     }
                 });
                 tx5cat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        intent.putExtra("Check","Books");
+                        intent.putExtra("PictureUploadingforMAC","Books");
                         con.startActivity(intent);
                     }
                 });
                 tx6cat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        intent.putExtra("Check","Fashion");
+                        intent.putExtra("PictureUploadingforMAC","Fashion");
                         con.startActivity(intent);
                     }
                 });
                 tx7cat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        intent.putExtra("Check","Furniture");
+                        intent.putExtra("PictureUploadingforMAC","Furniture");
                         con.startActivity(intent);
                     }
                 });
                 tx8cat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        intent.putExtra("Check","Electronics");
+                        intent.putExtra("PictureUploadingforMAC","Electronics");
                         con.startActivity(intent);
                     }
                 });

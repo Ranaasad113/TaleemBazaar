@@ -5,19 +5,15 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.provider.MediaStore;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.asad.taleembazar.R;
-import com.asad.taleembazar.adpaters.RecyclerAdapterForSubmitadd;
 import com.asad.taleembazar.adpaters.RecyclerAdapterMyAccount;
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
@@ -161,7 +157,7 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
                 e.printStackTrace();
             }
             image1.setImageBitmap(bm);
-            Check obj=new Check(getApplicationContext(),"13014198-104@uog.edu.pk",bm);
+            PictureUploadingforMAC obj=new PictureUploadingforMAC(getApplicationContext(),"13014198-104@uog.edu.pk",bm);
 
         }
     }
