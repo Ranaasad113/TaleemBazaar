@@ -209,6 +209,15 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
             new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     textFromDialog = input.getText().toString();
+                    if(textFromDialog==null)
+                        Toast.makeText(getApplicationContext(),"This filed can't be empty",Toast.LENGTH_SHORT).show();
+                    else
+                    {
+                        /*
+                        here's rana arslan work so kindly work in
+                        that region nd make seperate function of your work
+                    */
+                    }
                 }
             });
     alertDialog.setNegativeButton("NO",
