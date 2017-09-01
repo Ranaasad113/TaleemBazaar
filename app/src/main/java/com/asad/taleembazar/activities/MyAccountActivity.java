@@ -1,18 +1,26 @@
 package com.asad.taleembazar.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.provider.MediaStore;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.asad.taleembazar.CallBack;
 import com.asad.taleembazar.R;
 import com.asad.taleembazar.adpaters.RecyclerAdapterMyAccount;
 import com.hitomi.cmlibrary.CircleMenu;
@@ -26,7 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import com.asad.taleembazar.fragments.RegisterFragment;
 import com.asad.taleembazar.serlization.MyAccountData;
 
-public class MyAccountActivity extends AppCompatActivity implements RegisterFragment.Communication {
+public class MyAccountActivity extends AppCompatActivity implements RegisterFragment.Communication,CallBack {
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
     private RecyclerAdapterMyAccount mAdapter;
@@ -35,6 +43,8 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
     private CircleMenu mCircleMenu;
     private static final int REQUEST_GALLERY_CODE = 2;
     private RecyclerView.LayoutManager mLayoutManager;
+    private String type;
+    private String textFromDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +73,11 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
         mLayoutManager = new GridLayoutManager(this, 1);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
-        mArrayList.add(new MyAccountData(R.drawable.personalinfo_icon, "Personal Information"));
         mArrayList.add(new MyAccountData(R.drawable.changepassword_icon, "Change Password"));
-        mArrayList.add(new MyAccountData(R.drawable.changemail_icon, "Change Email"));
         mArrayList.add(new MyAccountData(R.drawable.changephoneno_icon, "Change Mobile No"));
         mArrayList.add(new MyAccountData(0, "Sign Out"));
         mAdapter = new RecyclerAdapterMyAccount(mArrayList);
+        mAdapter.setOnClick(this);
         mRecyclerView.setAdapter(mAdapter) ;
 
     }
@@ -161,7 +170,56 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
 
         }
     }
+    @Override
+    public void onClick(int position) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyAccountActivity.this);
+        final EditText input = new EditText(MyAccountActivity.this);
+        if(position==0)
+        { setDailog(position);}
 
+        else if(position==1)
+        {setDailog(position);}
+
+
+
+    }
+
+    private void setDailog(int position)
+    {
+    AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyAccountActivity.this);
+    final EditText input = new EditText(MyAccountActivity.this);
+    if(position==0)
+    { alertDialog.setTitle("PASSWORD");
+        alertDialog.setMessage("Enter Password");
+        type="Password";
+    }
+
+    else if(position==1)
+    {alertDialog.setTitle("Mobile Number");
+        alertDialog.setMessage("Enter Mobile Number");
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        type="Phone Number";}
+
+    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.MATCH_PARENT);
+    input.setLayoutParams(lp);
+    alertDialog.setView(input);
+    alertDialog.setPositiveButton("YES",
+            new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    textFromDialog = input.getText().toString();
+                }
+            });
+    alertDialog.setNegativeButton("NO",
+            new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+    alertDialog.show();
+
+}
     }
 
 

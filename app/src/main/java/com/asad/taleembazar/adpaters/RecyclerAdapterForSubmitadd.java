@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.asad.taleembazar.CallBack;
 import com.asad.taleembazar.R;
 
 /**
@@ -17,6 +18,7 @@ public class RecyclerAdapterForSubmitadd extends RecyclerView.Adapter<RecyclerAd
     private static final int FIRST_VIEW=42;
     private static final int THIRD_VIEW=44;
     private static final int FORTH_VIEW=45;
+
 
     public RecyclerAdapterForSubmitadd()
     {
@@ -45,7 +47,8 @@ public class RecyclerAdapterForSubmitadd extends RecyclerView.Adapter<RecyclerAd
 
     @Override
     public void onBindViewHolder(RecyclerAdapterForSubmitadd.Holder holder, int position) {
-        if(position<1 || position>=4) return;
+        if(position<1 || position>=4)
+            return;
 
 
 
@@ -73,19 +76,21 @@ public class RecyclerAdapterForSubmitadd extends RecyclerView.Adapter<RecyclerAd
 
     }
 
-    public static class Holder extends RecyclerView.ViewHolder
-    {
 
-        public Holder(View itemView,int viewType) {
-            super(itemView);
-            if(viewType==FIRST_VIEW) return;
-            if(viewType==SECOND_VIEW) return;
-            if(viewType==THIRD_VIEW) return;
-            if(viewType==FORTH_VIEW) return;
+     class Holder extends RecyclerView.ViewHolder {
+
+         public Holder(View itemView, int viewType) {
+             super(itemView);
 
 
-        }
-    }
+             if (viewType == FIRST_VIEW) return;
+             if (viewType == SECOND_VIEW) return;
+             if (viewType == THIRD_VIEW) return;
+             if (viewType == FORTH_VIEW) return;
 
 
+         }
+
+
+     }
 }
