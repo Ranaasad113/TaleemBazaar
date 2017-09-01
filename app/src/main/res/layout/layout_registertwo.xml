@@ -57,20 +57,23 @@
                 android:layout_marginLeft="@dimen/left_right_margin_edittext"
                 android:layout_marginRight="@dimen/left_right_margin_edittext"
                 android:textColorHint="@color/edittext_hnt_color"
+                app:passwordToggleEnabled="true"
+
 
                 >
                 <android.support.design.widget.TextInputEditText
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPassword"
                     android:ems="10"
-                    android:hint="Email"
-                    android:id="@+id/email_register_edittext"
+                    android:hint="Password"
+                    android:id="@+id/password_register_edittext"
                     android:textSize="@dimen/text_size"
 
                     />
             </android.support.design.widget.TextInputLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -88,8 +91,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:ems="10"
-                    android:hint="Password"
-                    android:id="@+id/password_register_edittext"
+                    android:hint="Confirm Password"
+                    android:id="@+id/cnfrm"
                     android:textSize="@dimen/text_size"
 
                     />

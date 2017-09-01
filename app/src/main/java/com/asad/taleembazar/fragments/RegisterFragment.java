@@ -3,6 +3,7 @@ package com.asad.taleembazar.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,6 +23,18 @@ import com.asad.taleembazar.R;
 import com.asad.taleembazar.adpaters.RecyclerAdapterForSubmitadd;
 import com.asad.taleembazar.adpaters.RecyclerAdpaterCategories;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,7 +53,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     private RecyclerView.LayoutManager layoutManager;
     private static Context CONTEXT;
     private static String TYPE;
-    private EditText fname,lname;
+    private EditText fname,email;
 
 
     public RegisterFragment() {
@@ -55,7 +68,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
             View view = inflater.inflate(R.layout.layout_for_register, container, false);
         fname=(EditText)view.findViewById(R.id.first_name_register_edittext);
-        lname=(EditText)view.findViewById(R.id.last_name_register_edittext);
+        email=(EditText)view.findViewById(R.id.email_register_edittext);
         btn = (Button) view.findViewById(R.id.next_btn_for_register);
             btn.setOnClickListener(this);
             toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_fragment);
@@ -71,20 +84,17 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         communication.accept(2);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        SecondFrgamnet fragmentscend=new SecondFrgamnet();
-        if(fname.getText().toString().isEmpty() && lname.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(),"Please Specify Firstname and Lastname",Toast.LENGTH_LONG).show();
+        if(fname.getText().toString().isEmpty() && email.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(),"Please Specify Username and Email",Toast.LENGTH_LONG).show();
         }
         else {
-            String a = fname.getText().toString() + " " + lname.getText().toString();
-            Bundle args = new Bundle();
-            args.putString("Name", a);
-            fragmentscend.setArguments(args);
-            fragmentTransaction.replace(R.id.coordinatelayout, fragmentscend);
-            fragmentTransaction.addToBackStack("Fragment_2");
-            fragmentTransaction.commit();
+            String e=email.getText().toString();
+            if (e.contains("@uog.edu.pk")) {
+                checkuser obj = new checkuser();
+                obj.execute(e);
+            } else {
+                Toast.makeText(getContext(),"Please Specify Your Uog Email Address",Toast.LENGTH_LONG).show();
+            }
 
         }
     }
@@ -95,6 +105,80 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         TYPE=type;
     }
 
+    private class checkuser extends AsyncTask<String, Void, String>
+    {
+        StringBuilder sb=new StringBuilder();
+        String url="http://taleembazaar.com/AndroidCheckUser.php";
+        String em;
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                em=params[0];
+                URL u = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) u.openConnection();
+                con.setDoOutput(true);
+
+                con.setRequestMethod("POST");
+
+                OutputStream os = con.getOutputStream();
+                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                String data = URLEncoder.encode("useremail", "UTF-8") + "=" + URLEncoder.encode(em, "UTF-8");
+                bw.write(data);
+                bw.flush();
+                bw.close();
+                InputStream is = con.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is,"iso-8859-1"));
+                String line = "";
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+                String m=sb.toString();
+
+                return sb.toString();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            if(s.equals("User Exist"))
+            {
+
+                Toast.makeText(getContext(),"User with that Email Already Exist",Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                SecondFrgamnet fragmentscend=new SecondFrgamnet();
+
+                String a = fname.getText().toString();
+                Bundle args = new Bundle();
+                args.putString("Name", a);
+                args.putString("Email",em);
+                fragmentscend.setArguments(args);
+                fragmentTransaction.replace(R.id.coordinatelayout, fragmentscend);
+                fragmentTransaction.addToBackStack("Fragment_2");
+                fragmentTransaction.commit();
+                getActivity().getFragmentManager().popBackStack();
+            }
+        }
+    }
 
 }

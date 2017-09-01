@@ -7,6 +7,9 @@
         android:required="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -39,9 +42,11 @@
         <activity
             android:name=".activities.SelectCategoriesActivity"
             android:parentActivityName=".activities.HomeActivity" />
-        <activity android:name=".activities.SignInActivity"
+        <activity
+            android:name=".activities.SignInActivity"
             android:windowSoftInputMode="stateVisible|adjustPan" />
-        <activity android:name=".activities.SubmitAddActivity"></activity>
+        <activity android:name=".activities.SubmitAddActivity" />
+        <activity android:name=".activities.Check"></activity>
     </application>
 
 </manifest>

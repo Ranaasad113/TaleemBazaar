@@ -161,6 +161,7 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
                 e.printStackTrace();
             }
             image1.setImageBitmap(bm);
+            Check obj=new Check(getApplicationContext(),"13014198-104@uog.edu.pk",bm);
 
         }
     }

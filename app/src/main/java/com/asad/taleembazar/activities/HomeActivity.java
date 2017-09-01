@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.asad.taleembazar.R;
 import com.asad.taleembazar.adpaters.RecyclerviewForHome;
@@ -108,10 +109,15 @@ public class HomeActivity extends AppCompatActivity
         switch (id)
         {
             case R.id.nav_myaccount:
-                Intent intent=new Intent(getApplicationContext(),MyAccountActivity.class);
+            {Intent intent=new Intent(getApplicationContext(),MyAccountActivity.class);
                 intent.putExtra("Check","From My Account");
                 startActivity(intent);
-                break;
+                break;}
+
+            default:
+            {
+                Toast.makeText(getApplicationContext(),"Unable to start",Toast.LENGTH_LONG).show();
+            }
         }
 
         drawer.closeDrawer(GravityCompat.START);

@@ -1,9 +1,12 @@
 package com.asad.taleembazar.fragments;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.asad.taleembazar.R;
+import com.asad.taleembazar.activities.HomeActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -33,9 +37,9 @@ import java.net.URLEncoder;
  */
 public class SecondFrgamnet extends Fragment {
 //partial registeration without email done
-public EditText email,password;
+public EditText cnfrm,password;
    public Button btn;
-    String value;
+    String value,ema;
     public SecondFrgamnet() {
         // Required empty public constructor
     }
@@ -48,88 +52,31 @@ public EditText email,password;
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_fragment);
         toolbar.setTitle("Register");
         value = getArguments().getString("Name");
-      email=(EditText) view.findViewById(R.id.email_register_edittext);
+        ema=getArguments().getString("Email");
+      cnfrm=(EditText) view.findViewById(R.id.cnfrm);
         password=(EditText)view.findViewById(R.id.password_register_edittext);
         btn=(Button) view.findViewById(R.id.register_btn_for_register);
        btn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+               String a=password.getText().toString();
+               String b=cnfrm.getText().toString();
+if (a.equals(b))
+{
+    RegisterUser obj=new RegisterUser();
+    obj.execute(value,ema,password.getText().toString());
+}
+else
+{
+    Toast.makeText(getContext(),"Password Does not Match",Toast.LENGTH_LONG).show();
+}
 
-               String e = email.getText().toString();
-               if (e.contains("@uog.edu.pk")) {
-                   checkuser obj = new checkuser();
-                   obj.execute(e);
-               } else {
-Toast.makeText(getContext(),"Please Specify Your Uog Email Address",Toast.LENGTH_LONG).show();
-               }
+
            }
        });
         return view;
     }
-    private class checkuser extends AsyncTask<String, Void, String>
-    {
-        StringBuilder sb=new StringBuilder();
-        String url="http://taleembazaar.com/AndroidCheckUser.php";
-        String em;
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            try {
-
-                em=params[0];
-                URL u = new URL(url);
-                HttpURLConnection con = (HttpURLConnection) u.openConnection();
-                con.setDoOutput(true);
-
-                con.setRequestMethod("POST");
-
-                OutputStream os = con.getOutputStream();
-                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                String data = URLEncoder.encode("useremail", "UTF-8") + "=" + URLEncoder.encode(em, "UTF-8");
-                bw.write(data);
-                bw.flush();
-                bw.close();
-                InputStream is = con.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(is,"iso-8859-1"));
-                String line = "";
-                while ((line = br.readLine()) != null) {
-                    sb.append(line);
-                }
-                String m=sb.toString();
-
-                return sb.toString();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            if(s.equals("User Exist"))
-            {
-
-                Toast.makeText(getContext(),"User with that Email Already Exist",Toast.LENGTH_LONG).show();
-            }
-            else
-            {
-                RegisterUser obj=new RegisterUser();
-                obj.execute(value,email.getText().toString(),password.getText().toString());
-            }
-        }
-    }
     private class RegisterUser extends AsyncTask<String, Void, String>
     {
         StringBuilder sb=new StringBuilder();
@@ -193,6 +140,9 @@ Toast.makeText(getContext(),"Please Specify Your Uog Email Address",Toast.LENGTH
             {
 
                 Toast.makeText(getContext(),"User is Registered",Toast.LENGTH_LONG).show();
+                Intent i=new Intent(getContext(), HomeActivity.class);
+                startActivity(i);
+
             }
             else
             {

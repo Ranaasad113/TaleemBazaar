@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:hint="First Name"
+                android:hint="UserName"
                 android:id="@+id/first_name_register_edittext"
                 android:textSize="@dimen/text_size"
 
@@ -88,10 +88,9 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:hint="Last Name"
-                    android:id="@+id/last_name_register_edittext"
+                    android:hint="Email"
+                    android:id="@+id/email_register_edittext"
                     android:textSize="@dimen/text_size"
-
                     />
             </android.support.design.widget.TextInputLayout>
 
