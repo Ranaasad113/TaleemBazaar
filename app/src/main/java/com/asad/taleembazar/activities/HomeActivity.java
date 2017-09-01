@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.asad.taleembazar.CommonConstant;
 import com.asad.taleembazar.R;
 import com.asad.taleembazar.adpaters.RecyclerviewForHome;
 import com.asad.taleembazar.model.DataSourceWrapper;
@@ -39,29 +40,30 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //ranaarsi
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        initializeSources();
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        submitaddbutton=(FloatingActionButton)findViewById(R.id.submitadd_toggle_button);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(0).setChecked(true);
-        textviewOfHeader();
-        homeItems();
-     //rana arslan
-        submitaddbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                submitAdd();
-            }
-        });
+
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            initializeSources();
+            drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            submitaddbutton = (FloatingActionButton) findViewById(R.id.submitadd_toggle_button);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.setDrawerListener(toggle);
+            toggle.syncState();
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
+            navigationView.getMenu().getItem(0).setChecked(true);
+            textviewOfHeader();
+            homeItems();
+            //rana arslan
+            submitaddbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    submitAdd();
+                }
+            });
 
 
 

@@ -2,9 +2,11 @@ package com.asad.taleembazar.fragments;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -85,7 +87,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         communication.accept(2);
         if(fname.getText().toString().isEmpty() && email.getText().toString().isEmpty()) {
-            Toast.makeText(getContext(),"Please Specify Username and Email",Toast.LENGTH_LONG).show();
+            Snackbar.make(btn,"Please Specify Your Username and Email Address",Snackbar.LENGTH_LONG).show();
         }
         else {
             String e=email.getText().toString();
@@ -93,7 +95,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 checkuser obj = new checkuser();
                 obj.execute(e);
             } else {
-                Toast.makeText(getContext(),"Please Specify Your Uog Email Address",Toast.LENGTH_LONG).show();
+                Snackbar.make(btn,"Please Specify Your Uog Email Address",Snackbar.LENGTH_LONG).show();
             }
 
         }
@@ -110,9 +112,15 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         StringBuilder sb=new StringBuilder();
         String url="http://taleembazaar.com/AndroidCheckUser.php";
         String em;
+        ProgressDialog progressDialog=new ProgressDialog(getContext());
 
         @Override
         protected void onPreExecute() {
+            progressDialog.setMessage("Checking signup please wait");
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+
             super.onPreExecute();
         }
 
@@ -160,10 +168,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             if(s.equals("User Exist"))
             {
 
-                Toast.makeText(getContext(),"User with that Email Already Exist",Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+                Snackbar.make(btn,"User with that Email Already Exist",Snackbar.LENGTH_SHORT).show();
             }
             else
             {
+                progressDialog.dismiss();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 SecondFrgamnet fragmentscend=new SecondFrgamnet();

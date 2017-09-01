@@ -1,9 +1,11 @@
 package com.asad.taleembazar.fragments;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -68,7 +70,7 @@ if (a.equals(b))
 }
 else
 {
-    Toast.makeText(getContext(),"Password Does not Match",Toast.LENGTH_LONG).show();
+    Snackbar.make(btn,"Password Does not Match",Snackbar.LENGTH_LONG).show();
 }
 
 
@@ -84,9 +86,14 @@ else
         String nme;
         String eme;
         String pass;
+        ProgressDialog progressDialog=new ProgressDialog(getContext());
 
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        { progressDialog.setMessage("Checking signup please wait");
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.show();
             super.onPreExecute();
         }
 
@@ -139,14 +146,15 @@ else
             if(s.equals("Registered Successsfully"))
             {
 
-                Toast.makeText(getContext(),"User is Registered",Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
                 Intent i=new Intent(getContext(), HomeActivity.class);
                 startActivity(i);
 
             }
             else
             {
-                Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+                Snackbar.make(btn, s, Snackbar.LENGTH_LONG).show();
             }
         }
     }

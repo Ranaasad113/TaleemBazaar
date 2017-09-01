@@ -1,7 +1,11 @@
 package com.asad.taleembazar.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.Preference;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.asad.taleembazar.CommonConstant;
 import com.asad.taleembazar.R;
 import com.asad.taleembazar.fragments.RegisterFragment;
 
@@ -31,7 +36,8 @@ import java.net.URLEncoder;
 public class SignInActivity extends AppCompatActivity implements RegisterFragment.Communication {
   private Toolbar mToolbar;
     EditText user,pass;
-    Button sign;
+   private Button sign;
+    private String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +60,7 @@ public class SignInActivity extends AppCompatActivity implements RegisterFragmen
         public void onClick(View v) {
             String name=user.getText().toString();
             String p=pass.getText().toString();
+            username=name;
             signin obj=new signin();
             obj.execute(name,p);
         }
@@ -90,10 +97,16 @@ public class SignInActivity extends AppCompatActivity implements RegisterFragmen
         String url="http://taleembazaar.com/Androidlogin.php";
         String nme;
         String password;
+        ProgressDialog progressDialog=new ProgressDialog(SignInActivity.this);
 
 
         @Override
         protected void onPreExecute() {
+            progressDialog.setMessage("Checking login please wait");
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+
             super.onPreExecute();
         }
 
@@ -143,11 +156,13 @@ public class SignInActivity extends AppCompatActivity implements RegisterFragmen
             if(s.equals("Login Successful"))
             {
 
-                Toast.makeText(getApplicationContext(),"hello",Toast.LENGTH_LONG).show();
+
+               progressDialog.dismiss();
                             }
             else
             {
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+                Snackbar.make(sign,"There is an error",Snackbar.LENGTH_SHORT).show();
             }
         }
     }
