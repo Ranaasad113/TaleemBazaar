@@ -21,6 +21,9 @@ import com.asad.taleembazar.CommonConstant;
 import com.asad.taleembazar.R;
 import com.asad.taleembazar.fragments.RegisterFragment;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -153,17 +156,43 @@ public class SignInActivity extends AppCompatActivity implements RegisterFragmen
         @Override
         protected void onPostExecute(String s) {
 
-            if(s.equals("Login Successful"))
+            String uname="";
+            String uemail="";
+            String userdp="";
+            if(s.contains("main_info"))
             {
 
-
+Toast.makeText(getApplicationContext(),"Login Successfull",Toast.LENGTH_LONG).show();
                progressDialog.dismiss();
-                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+               try {
+                   JSONObject obj1 = new JSONObject(s);
+                   JSONArray contacts = obj1.getJSONArray("main_info");
+                   int count = 0;
+                   while (count < contacts.length()) {
+                       JSONObject jo = contacts.getJSONObject(count);
+                        uname= jo.getString("username");
+                        uemail= jo.getString("useremail");
+                        userdp = jo.getString("userdp");
+                       break;
+                   }
+                   SharedPreferences my=SignInActivity.this.getSharedPreferences("LoginInfo.tb",MODE_PRIVATE);
+                   SharedPreferences.Editor editor=my.edit();
+                   editor.putString("username",uname);
+                   editor.putString("useremail", uemail);
+                   editor.putString("userdp",userdp);
+                   editor.commit();
+               }
+               catch (Exception e)
+               {
+Toast.makeText(getApplicationContext(),"Unable to Parse Data",Toast.LENGTH_LONG).show();
+               }
+
+
                             }
             else
             {
                 progressDialog.dismiss();
-                Snackbar.make(sign,"There is an error",Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(sign,"There is some error on server",Snackbar.LENGTH_SHORT).show();
             }
         }
     }

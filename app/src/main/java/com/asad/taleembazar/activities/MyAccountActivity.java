@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -58,7 +59,7 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
     private CircleMenu mCircleMenu;
     private static final int REQUEST_GALLERY_CODE = 2;
     private RecyclerView.LayoutManager mLayoutManager;
-    private String type;
+    private String type,username,useremail,userdp;
     private String textFromDialog;
     EditText oldpass;
     EditText newpass;
@@ -73,6 +74,11 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
         mCircleMenu = (CircleMenu) findViewById(R.id.circle_menu);
         setCircleMenu();
         settingToolbar();//Here's Toolbar of that Activity Set
+        SharedPreferences my=MyAccountActivity.this.getSharedPreferences("LoginInfo.tb",MODE_PRIVATE);
+        username=my.getString("username","");
+
+        useremail=my.getString("useremail","");
+        userdp=my.getString("userdp","");
 
     }
 
@@ -83,7 +89,7 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
 
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapse);
-        collapsingToolbar.setTitle("Rana Asad");
+        collapsingToolbar.setTitle(username);
         collapsingToolbar.setCollapsedTitleTextColor(getResources().getColor(R.color.white_color));
         collapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.white_color));
         collapsingToolbar.setContentScrimColor(getResources().getColor(R.color.colorPrimary));
@@ -220,7 +226,7 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
                 String a=oldpass.getText().toString();
                 String b=newpass.getText().toString();
                 String c=cnfrmpass.getText().toString();
-                String e="13014198-103@uog.edu.pk";
+                String e=useremail;
                 if(b.equals(c))
                 {
                     changepass1 obj=new changepass1();
@@ -265,7 +271,7 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
                     if(textFromDialog==null)
                         Toast.makeText(getApplicationContext(),"This filed can't be empty",Toast.LENGTH_SHORT).show();
                     else {
-                        String e = "13014198-103@uog.edu.pk";
+                        String e = useremail;
                         String a = input.getText().toString();
                         if (a.length() != 11) {
                             Toast.makeText(getApplicationContext(), "Invalid Number", Toast.LENGTH_LONG).show();
