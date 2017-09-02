@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.asad.taleembazar.CallBack;
+import com.asad.taleembazar.adpaters.callback;
 import com.asad.taleembazar.R;
 
 /**

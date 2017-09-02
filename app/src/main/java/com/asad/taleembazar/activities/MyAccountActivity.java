@@ -1,40 +1,55 @@
 package com.asad.taleembazar.activities;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.asad.taleembazar.CallBack;
+
 import com.asad.taleembazar.R;
 import com.asad.taleembazar.adpaters.RecyclerAdapterMyAccount;
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import com.asad.taleembazar.fragments.RegisterFragment;
 import com.asad.taleembazar.serlization.MyAccountData;
 
-public class MyAccountActivity extends AppCompatActivity implements RegisterFragment.Communication,CallBack {
+public class MyAccountActivity extends AppCompatActivity implements RegisterFragment.Communication,com.asad.taleembazar.adpaters.callback {
     private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
     private RecyclerAdapterMyAccount mAdapter;
@@ -45,6 +60,9 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
     private RecyclerView.LayoutManager mLayoutManager;
     private String type;
     private String textFromDialog;
+    EditText oldpass;
+    EditText newpass;
+    EditText cnfrmpass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,48 +193,86 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyAccountActivity.this);
         final EditText input = new EditText(MyAccountActivity.this);
         if(position==0)
-        { setDailog(position);}
+        { changepass();}
 
         else if(position==1)
-        {setDailog(position);}
+        {changenumber();}
 
 
 
     }
-
-    private void setDailog(int position)
+    private void changepass()
     {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.customdialog1, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText oldpass = (EditText) dialogView.findViewById(R.id.oldpass);
+        final EditText newpass = (EditText) dialogView.findViewById(R.id.newpass);
+        final EditText cnfrmpass = (EditText) dialogView.findViewById(R.id.cnfrmpass);
+
+
+        dialogBuilder.setTitle("Change Password");
+        dialogBuilder.setMessage("Enter Password below");
+        dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String a=oldpass.getText().toString();
+                String b=newpass.getText().toString();
+                String c=cnfrmpass.getText().toString();
+                String e="13014198-103@uog.edu.pk";
+                if(b.equals(c))
+                {
+                    changepass1 obj=new changepass1();
+                    obj.execute(a,b,e);
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"New Password Does not Match with Confirm Password",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+               dialog.dismiss();
+                           }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+    }
+
+    private void changenumber()
+    {
+
     AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyAccountActivity.this);
-    final EditText input = new EditText(MyAccountActivity.this);
-    if(position==0)
-    { alertDialog.setTitle("PASSWORD");
+        final EditText input = new EditText(MyAccountActivity.this);
+
+    alertDialog.setTitle("PASSWORD");
         alertDialog.setMessage("Enter Password");
         type="Password";
-    }
+        alertDialog.setView(input);
 
-    else if(position==1)
-    {alertDialog.setTitle("Mobile Number");
-        alertDialog.setMessage("Enter Mobile Number");
-        input.setInputType(InputType.TYPE_CLASS_NUMBER);
-        type="Phone Number";}
 
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.MATCH_PARENT);
     input.setLayoutParams(lp);
-    alertDialog.setView(input);
+
     alertDialog.setPositiveButton("YES",
             new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     textFromDialog = input.getText().toString();
                     if(textFromDialog==null)
                         Toast.makeText(getApplicationContext(),"This filed can't be empty",Toast.LENGTH_SHORT).show();
-                    else
-                    {
-                        /*
-                        here's rana arslan work so kindly work in
-                        that region nd make seperate function of your work
-                    */
+                    else {
+                        String e = "13014198-103@uog.edu.pk";
+                        String a = input.getText().toString();
+                        if (a.length() != 11) {
+                            Toast.makeText(getApplicationContext(), "Invalid Number", Toast.LENGTH_LONG).show();
+                        } else {
+                            changemobile obj1 = new changemobile();
+                            obj1.execute(a, e);
+                        }
                     }
                 }
             });
@@ -229,6 +285,140 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
     alertDialog.show();
 
 }
+    private class changepass1 extends AsyncTask<String, Void, String>
+    {
+        StringBuilder sb=new StringBuilder();
+        String url="http://taleembazaar.com/changepass.php";
+        String oldpass1;
+        String newpass1;
+        String mail;
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                 oldpass1= params[0];
+                newpass1 = params[1];
+                mail=params[2];
+                URL u = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) u.openConnection();
+                con.setDoOutput(true);
+
+                con.setRequestMethod("POST");
+
+                OutputStream os = con.getOutputStream();
+                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                String data = URLEncoder.encode("userpass", "UTF-8") + "=" + URLEncoder.encode(oldpass1, "UTF-8") + "&" +
+                        URLEncoder.encode("usernewpass", "UTF-8") + "=" + URLEncoder.encode(newpass1, "UTF-8") + "&" +
+                        URLEncoder.encode("useremail", "UTF-8") + "=" + URLEncoder.encode(mail, "UTF-8");
+                bw.write(data);
+                bw.flush();
+                bw.close();
+                InputStream is = con.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is,"iso-8859-1"));
+                String line = "";
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+                String m=sb.toString();
+
+                return sb.toString();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            if(s.equals("Password Changed Successfully"))
+            {
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+    private class changemobile extends AsyncTask<String, Void, String>
+    {
+        StringBuilder sb=new StringBuilder();
+        String url="http://taleembazaar.com/changemobile.php";
+        String mob;
+String m;
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                mob=params[0];
+                m=params[1];
+                URL u = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) u.openConnection();
+                con.setDoOutput(true);
+
+                con.setRequestMethod("POST");
+
+                OutputStream os = con.getOutputStream();
+                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                String data = URLEncoder.encode("usernum", "UTF-8") + "=" + URLEncoder.encode(mob, "UTF-8") + "&" +
+                        URLEncoder.encode("useremail", "UTF-8") + "=" + URLEncoder.encode(m, "UTF-8");
+                bw.write(data);
+                bw.flush();
+                bw.close();
+                InputStream is = con.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is,"iso-8859-1"));
+                String line = "";
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+                String m=sb.toString();
+
+                return sb.toString();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            if(s.equals("changed Successfully"))
+            {
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+            }
+        }
+    }
     }
 
 

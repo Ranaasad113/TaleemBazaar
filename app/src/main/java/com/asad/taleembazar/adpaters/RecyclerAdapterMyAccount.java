@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.asad.taleembazar.CallBack;
+
 import com.asad.taleembazar.R;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import com.asad.taleembazar.serlization.MyAccountData;
 
 public class RecyclerAdapterMyAccount extends RecyclerView.Adapter<RecyclerAdapterMyAccount.Holder>{
     ArrayList<MyAccountData> arrayList=new ArrayList<>();
-    private CallBack Clicklistener;
+    private callback Clicklistener;
     public RecyclerAdapterMyAccount(ArrayList<MyAccountData> arrayList)
     {
         this.arrayList=arrayList;
@@ -50,7 +50,7 @@ public class RecyclerAdapterMyAccount extends RecyclerView.Adapter<RecyclerAdapt
             holder.tx.setText(arrayList.get(position).gettxt());
         }
     }
-    public void setOnClick(CallBack onClick)
+    public void setOnClick(callback onClick)
     {
         Clicklistener=onClick;
     }

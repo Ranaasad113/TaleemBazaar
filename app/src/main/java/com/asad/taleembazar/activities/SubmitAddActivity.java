@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.asad.taleembazar.CallBack;
+
 import com.asad.taleembazar.R;
 import com.asad.taleembazar.adpaters.RecyclerAdapterForSubmitadd;
 
