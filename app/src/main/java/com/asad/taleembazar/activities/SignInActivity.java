@@ -162,7 +162,7 @@ public class SignInActivity extends AppCompatActivity implements RegisterFragmen
             if(s.contains("main_info"))
             {
 
-Toast.makeText(getApplicationContext(),"Login Successfull",Toast.LENGTH_LONG).show();
+
                progressDialog.dismiss();
                try {
                    JSONObject obj1 = new JSONObject(s);
@@ -170,17 +170,22 @@ Toast.makeText(getApplicationContext(),"Login Successfull",Toast.LENGTH_LONG).sh
                    int count = 0;
                    while (count < contacts.length()) {
                        JSONObject jo = contacts.getJSONObject(count);
-                        uname= jo.getString("username");
-                        uemail= jo.getString("useremail");
-                        userdp = jo.getString("userdp");
+                       uname = jo.getString("username");
+                       uemail = jo.getString("useremail");
+                       userdp = jo.getString("userdp");
                        break;
                    }
-                   SharedPreferences my=SignInActivity.this.getSharedPreferences("LoginInfo.tb",MODE_PRIVATE);
-                   SharedPreferences.Editor editor=my.edit();
-                   editor.putString("username",uname);
-                   editor.putString("useremail", uemail);
-                   editor.putString("userdp",userdp);
-                   editor.commit();
+                   if (uname.isEmpty()) {
+                       Toast.makeText(getApplicationContext(), "Fail to Login", Toast.LENGTH_LONG).show();
+                   } else {
+                       Toast.makeText(getApplicationContext(),"Login Successfull",Toast.LENGTH_LONG).show();
+                       SharedPreferences my = SignInActivity.this.getSharedPreferences("LoginInfo.tb", MODE_PRIVATE);
+                       SharedPreferences.Editor editor = my.edit();
+                       editor.putString("username", uname);
+                       editor.putString("useremail", uemail);
+                       editor.putString("userdp", userdp);
+                       editor.commit();
+                   }
                }
                catch (Exception e)
                {

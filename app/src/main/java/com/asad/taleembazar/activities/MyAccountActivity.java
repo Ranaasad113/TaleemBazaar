@@ -73,13 +73,13 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
         mToolbar = (Toolbar) findViewById(R.id.toolbarmyaccount);
         mCircleMenu = (CircleMenu) findViewById(R.id.circle_menu);
         setCircleMenu();
-        settingToolbar();//Here's Toolbar of that Activity Set
+       //Here's Toolbar of that Activity Set
         SharedPreferences my=MyAccountActivity.this.getSharedPreferences("LoginInfo.tb",MODE_PRIVATE);
         username=my.getString("username","");
 
         useremail=my.getString("useremail","");
         userdp=my.getString("userdp","");
-
+        settingToolbar();
     }
 
     private void settingToolbar() {
@@ -140,38 +140,38 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
                 .addSubMenu(Color.parseColor("#30A400"), R.drawable.image_gallery_icon);
         mCircleMenu.setOnMenuSelectedListener(new OnMenuSelectedListener() {
 
-            @Override
-            public void onMenuSelected(int index) {
-        switch (index) {
-            case 0:
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, REQUEST_CAPTURE);
-                break;
-            case 1:
-                Intent intent1 = new Intent();
-                intent1.setType("image/*");
-                intent1.setAction(Intent.ACTION_GET_CONTENT);//
-                startActivityForResult(Intent.createChooser(intent1, "Select File"), REQUEST_GALLERY_CODE);
-                break;
+                                                  @Override
+                                                  public void onMenuSelected(int index) {
+                                                      switch (index) {
+                                                          case 0:
+                                                              Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                                              startActivityForResult(intent, REQUEST_CAPTURE);
+                                                              break;
+                                                          case 1:
+                                                              Intent intent1 = new Intent();
+                                                              intent1.setType("image/*");
+                                                              intent1.setAction(Intent.ACTION_GET_CONTENT);//
+                                                              startActivityForResult(Intent.createChooser(intent1, "Select File"), REQUEST_GALLERY_CODE);
+                                                              break;
 
-        }
-                                                 }
-        }
+                                                      }
+                                                  }
+                                              }
 
         );
 
         mCircleMenu.setOnMenuStatusChangeListener(new OnMenuStatusChangeListener() {
 
-            @Override
-            public void onMenuOpened() {
+                                                      @Override
+                                                      public void onMenuOpened() {
 
-            }
+                                                      }
 
-            @Override
-            public void onMenuClosed() {
+                                                      @Override
+                                                      public void onMenuClosed() {
 
-            }
-        }
+                                                      }
+                                                  }
         );
     }
 
@@ -240,8 +240,8 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
         });
         dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-               dialog.dismiss();
-                           }
+                dialog.dismiss();
+            }
         });
         AlertDialog b = dialogBuilder.create();
         b.show();
@@ -250,47 +250,47 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
     private void changenumber()
     {
 
-    AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyAccountActivity.this);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyAccountActivity.this);
         final EditText input = new EditText(MyAccountActivity.this);
 
-    alertDialog.setTitle("PASSWORD");
+        alertDialog.setTitle("PASSWORD");
         alertDialog.setMessage("Enter Password");
         type="Password";
         alertDialog.setView(input);
 
 
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.MATCH_PARENT);
-    input.setLayoutParams(lp);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
 
-    alertDialog.setPositiveButton("YES",
-            new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    textFromDialog = input.getText().toString();
-                    if(textFromDialog==null)
-                        Toast.makeText(getApplicationContext(),"This filed can't be empty",Toast.LENGTH_SHORT).show();
-                    else {
-                        String e = useremail;
-                        String a = input.getText().toString();
-                        if (a.length() != 11) {
-                            Toast.makeText(getApplicationContext(), "Invalid Number", Toast.LENGTH_LONG).show();
-                        } else {
-                            changemobile obj1 = new changemobile();
-                            obj1.execute(a, e);
+        alertDialog.setPositiveButton("YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        textFromDialog = input.getText().toString();
+                        if(textFromDialog==null)
+                            Toast.makeText(getApplicationContext(),"This filed can't be empty",Toast.LENGTH_SHORT).show();
+                        else {
+                            String e = useremail;
+                            String a = input.getText().toString();
+                            if (a.length() != 11) {
+                                Toast.makeText(getApplicationContext(), "Invalid Number", Toast.LENGTH_LONG).show();
+                            } else {
+                                changemobile obj1 = new changemobile();
+                                obj1.execute(a, e);
+                            }
                         }
                     }
-                }
-            });
-    alertDialog.setNegativeButton("NO",
-            new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-    alertDialog.show();
+                });
+        alertDialog.setNegativeButton("NO",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        alertDialog.show();
 
-}
+    }
     private class changepass1 extends AsyncTask<String, Void, String>
     {
         StringBuilder sb=new StringBuilder();
@@ -310,7 +310,7 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
 
             try {
 
-                 oldpass1= params[0];
+                oldpass1= params[0];
                 newpass1 = params[1];
                 mail=params[2];
                 URL u = new URL(url);
@@ -366,7 +366,7 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
         StringBuilder sb=new StringBuilder();
         String url="http://taleembazaar.com/changemobile.php";
         String mob;
-String m;
+        String m;
         @Override
         protected void onPreExecute() {
 
@@ -426,6 +426,4 @@ String m;
             }
         }
     }
-    }
-
-
+}
