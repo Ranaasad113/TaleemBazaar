@@ -158,6 +158,7 @@ public class SignInActivity extends AppCompatActivity implements RegisterFragmen
 
 
                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
                             }
             else
             {

@@ -116,7 +116,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
         @Override
         protected void onPreExecute() {
-            progressDialog.setMessage("Checking signup please wait");
+            progressDialog.setMessage("Checking Email please wait");
             progressDialog.setIndeterminate(true);
             progressDialog.setCancelable(false);
             progressDialog.show();
