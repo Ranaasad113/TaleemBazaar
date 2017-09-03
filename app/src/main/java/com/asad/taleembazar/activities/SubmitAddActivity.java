@@ -1,11 +1,14 @@
 package com.asad.taleembazar.activities;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -26,6 +29,20 @@ import android.widget.Toast;
 
 import com.asad.taleembazar.R;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class SubmitAddActivity extends AppCompatActivity {
@@ -169,15 +186,19 @@ public class SubmitAddActivity extends AppCompatActivity {
         };
         spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item2);
         selectlocation.setAdapter(spinnerArrayAdapter);
+
         selectlocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItemText = (String) parent.getItemAtPosition(position);
+                TextView selected = (TextView) view;
+
+                Toast.makeText(getApplicationContext(),selected.getText().toString(),Toast.LENGTH_LONG).show();
                 // If user change the default selection
                 // First item is disable and it is used for hint
                 if(position > 0){
                     // Notify the selected item text
-                   location=selectedItemText;
+                  // location=selected.ge;
+                  //  Toast.makeText(getApplicationContext(),selectedItemText,Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -227,6 +248,7 @@ public class SubmitAddActivity extends AppCompatActivity {
                 if(position > 0){
                     // Notify the selected item text
                    category=selectedItemText;
+                    Toast.makeText(getApplicationContext(),selectedItemText,Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -238,15 +260,10 @@ public class SubmitAddActivity extends AppCompatActivity {
 
 
     private void intializearraylist() {
-        arraylistcategory.add("Select category");
-        arraylistcategory.add("Mobiles");
-        arraylistcategory.add("Cars");
-        arraylistcategory.add("Fashion");
-        arraylistcategory.add("Transport");
-        arralistlocation.add("Select location");
-        arralistlocation.add("Gujranwala");
-        arralistlocation.add("Gujrat");
-        arralistlocation.add("Sailkot");
+       categoriesfile obj=new categoriesfile();
+        obj.execute();
+       locationfile obj1=new locationfile();
+        obj1.execute();
     }
 
     private void settingToolbar() {
@@ -321,5 +338,142 @@ public class SubmitAddActivity extends AppCompatActivity {
                 break;
         }
     }
+    private class categoriesfile extends AsyncTask<String, Void, String>
+    {
+        StringBuilder sb=new StringBuilder();
+        String url="http://taleembazaar.com/getcategories.php";
+
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                URL u = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) u.openConnection();
+                con.setDoOutput(true);
+                InputStream is = con.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is,"iso-8859-1"));
+                String line = "";
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+                String m=sb.toString();
+
+                return sb.toString();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            String cid="";
+            String categories="";
+                try {
+                    JSONObject obj1 = new JSONObject(s);
+                    JSONArray contacts = obj1.getJSONArray("categories_main");
+                    int count = 0;
+                    while (count < contacts.length()) {
+                        JSONObject jo = contacts.getJSONObject(count);
+                        cid = jo.getString("cid");
+                        categories = jo.getString("categories");
+                        arraylistcategory.add(cid+" "+categories);
+                        count++;
+
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(getApplicationContext(),"Unable to Parse Data",Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+
+        }
+    private class locationfile extends AsyncTask<String, Void, String>
+    {
+        StringBuilder sb=new StringBuilder();
+        String url="http://taleembazaar.com/getlocation.php";
+
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                URL u = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) u.openConnection();
+                con.setDoOutput(true);
+                InputStream is = con.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is,"iso-8859-1"));
+                String line = "";
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+                String m=sb.toString();
+
+                return sb.toString();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            String locid="";
+            String location="";
+            try {
+                JSONObject obj1 = new JSONObject(s);
+                JSONArray contacts = obj1.getJSONArray("location_main");
+                int count = 0;
+                while (count < contacts.length()) {
+                    JSONObject jo = contacts.getJSONObject(count);
+                    locid = jo.getString("locid");
+                    location = jo.getString("location");
+                    arralistlocation.add(locid+" "+location);
+                    count++;
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Toast.makeText(getApplicationContext(),"Unable to Parse Data",Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+
+    }
 
 }
+
