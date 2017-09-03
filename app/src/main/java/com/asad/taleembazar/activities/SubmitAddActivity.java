@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.asad.taleembazar.CallBack;
 import com.asad.taleembazar.R;
 
 import org.json.JSONArray;
@@ -45,7 +46,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class SubmitAddActivity extends AppCompatActivity {
+public class SubmitAddActivity extends AppCompatActivity implements CallBack {
     private Toolbar mToolbar;
     private TextInputEditText title_TextInput;
     private TextInputEditText description_TextInput;
@@ -190,14 +191,12 @@ public class SubmitAddActivity extends AppCompatActivity {
         selectlocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                TextView selected = (TextView) view;
-
-                Toast.makeText(getApplicationContext(),selected.getText().toString(),Toast.LENGTH_LONG).show();
+                String selectedItemText = (String) parent.getItemAtPosition(position);
                 // If user change the default selection
                 // First item is disable and it is used for hint
                 if(position > 0){
                     // Notify the selected item text
-                  // location=selected.ge;
+                  location=selectedItemText;
                   //  Toast.makeText(getApplicationContext(),selectedItemText,Toast.LENGTH_LONG).show();
                 }
             }
@@ -248,7 +247,7 @@ public class SubmitAddActivity extends AppCompatActivity {
                 if(position > 0){
                     // Notify the selected item text
                    category=selectedItemText;
-                    Toast.makeText(getApplicationContext(),selectedItemText,Toast.LENGTH_LONG).show();
+
                 }
             }
             @Override
@@ -263,6 +262,7 @@ public class SubmitAddActivity extends AppCompatActivity {
        categoriesfile obj=new categoriesfile();
         obj.execute();
        locationfile obj1=new locationfile();
+        obj1.setCalback(this);
         obj1.execute();
     }
 
@@ -338,6 +338,16 @@ public class SubmitAddActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    public void getValue(Boolean bol) {
+        if (bol)
+        {
+            displaySpinnerLocation();
+        displaySpinnerCategory();
+    }
+    }
+
     private class categoriesfile extends AsyncTask<String, Void, String>
     {
         StringBuilder sb=new StringBuilder();
@@ -386,6 +396,7 @@ public class SubmitAddActivity extends AppCompatActivity {
                 try {
                     JSONObject obj1 = new JSONObject(s);
                     JSONArray contacts = obj1.getJSONArray("categories_main");
+                    arraylistcategory.add("Category");
                     int count = 0;
                     while (count < contacts.length()) {
                         JSONObject jo = contacts.getJSONObject(count);
@@ -410,6 +421,7 @@ public class SubmitAddActivity extends AppCompatActivity {
     {
         StringBuilder sb=new StringBuilder();
         String url="http://taleembazaar.com/getlocation.php";
+        CallBack callBack;
 
 
 
@@ -455,6 +467,7 @@ public class SubmitAddActivity extends AppCompatActivity {
                 JSONObject obj1 = new JSONObject(s);
                 JSONArray contacts = obj1.getJSONArray("location_main");
                 int count = 0;
+                arralistlocation.add("Location");
                 while (count < contacts.length()) {
                     JSONObject jo = contacts.getJSONObject(count);
                     locid = jo.getString("locid");
@@ -463,6 +476,7 @@ public class SubmitAddActivity extends AppCompatActivity {
                     count++;
 
                 }
+                callBack.getValue(true);
 
             }
             catch (Exception e)
@@ -472,8 +486,14 @@ public class SubmitAddActivity extends AppCompatActivity {
 
 
         }
+        public void setCalback(CallBack calbacks)
+        {
+
+            callBack=calbacks;
+        }
 
     }
+
 
 }
 
