@@ -9,6 +9,7 @@
     card_view:cardElevation="4dp"
     card_view:cardMaxElevation="6dp"
     card_view:contentPadding="10dp"
+    android:layout_marginTop="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:clickable="true"
@@ -35,7 +36,7 @@
             android:textSize="@dimen/text_size"
             android:hint="Title"
             android:maxLength="70"
-            android:id="@+id/textinputedittext_title"
+            android:id="@+id/titleedittxt_submitadd"
             />
     </android.support.design.widget.TextInputLayout>
     <TextView
@@ -66,7 +67,7 @@
             android:textSize="@dimen/text_size"
             android:hint="Descrpition"
             android:maxLength="4096"
-            android:id="@+id/textinputedittext_descrpition"
+            android:id="@+id/descrpitionedittxt_submitadd"
             />
 
     </android.support.design.widget.TextInputLayout>

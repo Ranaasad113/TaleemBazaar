@@ -10,8 +10,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -19,11 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.asad.taleembazar.R;
-import com.asad.taleembazar.adpaters.RecyclerAdapterForSubmitadd;
-import com.asad.taleembazar.adpaters.RecyclerAdpaterCategories;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

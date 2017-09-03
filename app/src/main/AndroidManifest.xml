@@ -46,7 +46,8 @@
             android:name=".activities.SignInActivity"
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity android:name=".activities.SubmitAddActivity" />
-        <activity android:name=".activities.PictureUploadingforMAC"></activity>
+        <activity android:name=".activities.PictureUploadingforMAC" />
+        <activity android:name=".activities.SelectCategorySubmitActivity"></activity>
     </application>
 
 </manifest>
