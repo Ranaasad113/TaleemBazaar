@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/coordinatelayout"
+        android:id="@+id/containerfragments"
         android:fitsSystemWindows="true"
+        android:orientation="vertical"
         tools:context="com.asad.taleembazar.activities.HomeActivity">
 
         <android.support.design.widget.AppBarLayout
@@ -28,11 +36,39 @@
                 app:contentInsetStartWithNavigation="0dp"/>
 
         </android.support.design.widget.AppBarLayout>
+        <include
+            layout="@layout/cardview_for_images_for_adds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <include
+            layout="@layout/cardview_choose_category_submitadds"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
+        <include
+            layout="@layout/cardview_title_decription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <include
+            layout="@layout/price_layoutsubmitadd"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
+        <include
+            layout="@layout/cardview_for_campus_of_uni"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
 
-        <android.support.v7.widget.RecyclerView
+    </LinearLayout>
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="75dp"
-            android:id="@+id/recyclerview_for_submitadd"
+            android:id="@+id/container"
+
             />
-</android.support.design.widget.CoordinatorLayout>
+    </FrameLayout>
+
+</ScrollView>
