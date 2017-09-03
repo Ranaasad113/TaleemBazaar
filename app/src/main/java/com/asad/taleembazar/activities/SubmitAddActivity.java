@@ -57,6 +57,7 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
     private Spinner selctcategory;
     private Spinner selectlocation;
     private Dialog dialog;
+    String email;
     private String title;//this is title
     private String description;//this is description
     private String category;//this is category
@@ -76,6 +77,8 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
         submitbutton=(Button)findViewById(R.id.button_submitadd);
         selctcategory=(Spinner)findViewById(R.id.selectcategory_submitadd);
         selectlocation=(Spinner)findViewById(R.id.selectlocation_submitadd);
+        SharedPreferences my=SubmitAddActivity.this.getSharedPreferences("LoginInfo.tb",MODE_PRIVATE);
+        email=my.getString("useremail","");
         settingToolbar();
         intializearraylist();
         displaySpinnerCategory();
@@ -151,7 +154,10 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
                 for(int j=0;j<imageviews.length;j++)
                 {
                     images[j]=((BitmapDrawable)imageviews[j].getDrawable()).getBitmap();
+
                 }
+                SubmitAddPicturesUpload obj=new SubmitAddPicturesUpload(getApplicationContext(),email,title,description,location,category,price,images[0],images[1],images[2],images[3]);
+
             }
         }
     }
@@ -197,7 +203,7 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
                 if(position > 0){
                     // Notify the selected item text
                   location=selectedItemText;
-                  //  Toast.makeText(getApplicationContext(),selectedItemText,Toast.LENGTH_LONG).show();
+                   Toast.makeText(getApplicationContext(),selectedItemText,Toast.LENGTH_LONG).show();
                     //this is
                 }
             }
@@ -248,7 +254,7 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
                 if(position > 0){
                     // Notify the selected item text
                    category=selectedItemText;
-
+                    Toast.makeText(getApplicationContext(),selectedItemText,Toast.LENGTH_LONG).show();
                 }
             }
             @Override
