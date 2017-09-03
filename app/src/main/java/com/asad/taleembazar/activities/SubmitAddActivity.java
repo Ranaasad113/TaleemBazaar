@@ -198,6 +198,7 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
                     // Notify the selected item text
                   location=selectedItemText;
                   //  Toast.makeText(getApplicationContext(),selectedItemText,Toast.LENGTH_LONG).show();
+                    //this is
                 }
             }
             @Override
