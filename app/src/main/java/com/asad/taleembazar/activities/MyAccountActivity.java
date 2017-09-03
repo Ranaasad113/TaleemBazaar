@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
@@ -79,6 +80,11 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
 
         useremail=my.getString("useremail","");
         userdp=my.getString("userdp","");
+        if(!userdp.isEmpty())
+        {
+            DownloadImage obj=new DownloadImage();
+            obj.execute(userdp);
+        }
         settingToolbar();
     }
 
@@ -424,6 +430,41 @@ public class MyAccountActivity extends AppCompatActivity implements RegisterFrag
             {
                 Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
             }
+        }
+    }
+
+    // DownloadImage AsyncTask
+    private class DownloadImage extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Create a progressdialog
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... URL) {
+
+            String imageURL = URL[0];
+
+            Bitmap bitmap = null;
+            try {
+                // Download Image from URL
+                InputStream input = new java.net.URL(imageURL).openStream();
+                // Decode Bitmap
+                bitmap = BitmapFactory.decodeStream(input);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            CircleImageView image1 = (CircleImageView) findViewById(R.id.profile_image_my_account);
+            // Set the bitmap into ImageView
+            image1.setImageBitmap(result);
+            // Close progressdialog mProgressDialog.dismiss();
         }
     }
 }

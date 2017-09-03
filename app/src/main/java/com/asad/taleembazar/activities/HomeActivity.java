@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.asad.taleembazar.CommonConstant;
 import com.asad.taleembazar.R;
 import com.asad.taleembazar.adpaters.RecyclerviewForHome;
 import com.asad.taleembazar.model.DataSourceWrapper;
@@ -116,6 +115,7 @@ public class HomeActivity extends AppCompatActivity
                 intent.putExtra("PictureUploadingforMAC","From My Account");
                 startActivity(intent);
                 break;}
+
 
             default:
             {
