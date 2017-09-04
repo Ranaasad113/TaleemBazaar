@@ -73,10 +73,10 @@ public class SubmitAddPicturesUpload {
         String email;
 String title;
     String desc;
-    String loc;
+    String loc,cid1;
     String cat;
     String price;
-
+String usernum;
         Context cnt;
 
         String ImageName = "image_name";
@@ -86,7 +86,7 @@ String title;
 
         String ServerUploadPath = "http://taleembazaar.com/submitadd.php";
 
-        public SubmitAddPicturesUpload(Context ctx, String email,String title,String desc,String loc,String cat,String price, Bitmap bm1,Bitmap bm2,Bitmap bm3,Bitmap bm4)
+        public SubmitAddPicturesUpload(Context ctx, String email,String usernum,String title,String desc,String loc,String cat,String price, Bitmap bm1,Bitmap bm2,Bitmap bm3,Bitmap bm4)
         {
             this.email=email;
             this.bitmap1=bm1;
@@ -94,11 +94,13 @@ String title;
             this.bitmap3=bm3;
             this.bitmap4=bm4;
             this.title=title;
-            this.loc=loc.substring(1,1);
-            this.cat=cat.substring(1,1);
+            this.loc=String.valueOf(loc.charAt(0));
+            this.cat=cat.substring(1,2);
+this.cid1=String.valueOf(cat.charAt(0));
             this.addtype=cat.substring(2,cat.length());
             this.desc=desc;
             this.price=price;
+            this.usernum=usernum;
             this.cnt=ctx;
             ImageUploadToServerFunction();
 
@@ -264,8 +266,9 @@ String title;
                         URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(desc, "UTF-8")+ "&" +
                         URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(price, "UTF-8")+ "&" +
                         URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(loc, "UTF-8")+ "&" +
-                        URLEncoder.encode("categorie", "UTF-8") + "=" + URLEncoder.encode(cat, "UTF-8")+ "&" +
-                        URLEncoder.encode("addtype", "UTF-8") + "=" + URLEncoder.encode(addtype, "UTF-8");
+                        URLEncoder.encode("categorie", "UTF-8") + "=" + URLEncoder.encode(cid1, "UTF-8")+ "&" +
+                        URLEncoder.encode("addtype", "UTF-8") + "=" + URLEncoder.encode(addtype, "UTF-8")+ "&" +
+                        URLEncoder.encode("usernum", "UTF-8") + "=" + URLEncoder.encode(usernum, "UTF-8");
 
 
                 return data;

@@ -159,6 +159,7 @@ public class SignInActivity extends AppCompatActivity implements RegisterFragmen
             String uname="";
             String uemail="";
             String userdp="";
+            String usernum="";
             if(s.contains("main_info"))
             {
 
@@ -173,6 +174,7 @@ public class SignInActivity extends AppCompatActivity implements RegisterFragmen
                        uname = jo.getString("username");
                        uemail = jo.getString("useremail");
                        userdp = jo.getString("userdp");
+                       usernum=jo.getString("usernum");
                        break;
                    }
                    if (uname.isEmpty()) {
@@ -184,12 +186,13 @@ public class SignInActivity extends AppCompatActivity implements RegisterFragmen
                        editor.putString("username", uname);
                        editor.putString("useremail", uemail);
                        editor.putString("userdp", userdp);
+                       editor.putString("usernum", usernum);
                        editor.commit();
                    }
                }
                catch (Exception e)
                {
-Toast.makeText(getApplicationContext(),"Unable to Parse Data",Toast.LENGTH_LONG).show();
+Toast.makeText(getApplicationContext(),"No Internet",Toast.LENGTH_LONG).show();
                }
 
 
