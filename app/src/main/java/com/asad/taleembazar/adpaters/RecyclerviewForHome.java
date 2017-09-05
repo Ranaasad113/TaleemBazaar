@@ -117,7 +117,8 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
         Intent intent=new Intent(con,SelectCategoriesActivity.class);
         public Holder(final View itemView, int viewType) {
             super(itemView);
-            tx1cat=(TextView)itemView.findViewById(R.id.textview_cars);
+            if(viewType==FIRST_VIEW)
+            { tx1cat=(TextView)itemView.findViewById(R.id.textview_cars);
             tx2cat=(TextView)itemView.findViewById(R.id.textview_mobile);
             tx3cat=(TextView)itemView.findViewById(R.id.textview_flats);
             tx4cat=(TextView)itemView.findViewById(R.id.textview_transport);
@@ -125,10 +126,6 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
             tx6cat=(TextView)itemView.findViewById(R.id.textview_fashion);
             tx7cat=(TextView)itemView.findViewById(R.id.textview_furniture);
             tx8cat=(TextView)itemView.findViewById(R.id.textview_electronics);
-            firstimg1 = (ImageView) itemView.findViewById(R.id.irst_imageview);
-            secondimg2 = (ImageView) itemView.findViewById(R.id.snd_imageview);
-            firstpricetx1 = (TextView) itemView.findViewById(R.id.firstprice_textview);
-            secondpricetx2 = (TextView) itemView.findViewById(R.id.scndprice_textview);
             tx1cat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -186,10 +183,16 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
                     }
                 });
 
-                return;
+
+
             }
-
-
+            else {
+                firstimg1 = (ImageView) itemView.findViewById(R.id.irst_imageview);
+                secondimg2 = (ImageView) itemView.findViewById(R.id.snd_imageview);
+                firstpricetx1 = (TextView) itemView.findViewById(R.id.firstprice_textview);
+                secondpricetx2 = (TextView) itemView.findViewById(R.id.scndprice_textview);
+            }
+            return;
 
 
 
@@ -197,4 +200,4 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
 
         }
     }
-
+}
