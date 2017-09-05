@@ -13,17 +13,24 @@ public class DataModelAdds {
     private String mTitle;
     private String mPrice;
     private String mDescription;
-    private HashMap<String,String> mProperties=new HashMap<>();
-    private String mImagesUrl;
-    public DataModelAdds(String mImagesUrl, String mType, String mTitle, String mPrice, String mDescription, HashMap<String,String> mProperties) {
+    private String[] mImagesUrl=new String[4];
+    private String mOwnername;
+    private String mLocation;
+    public DataModelAdds(String[] mImagesUrl,String ownername, String mType, String mTitle, String mPrice, String mDescription ) {
         this.mImagesUrl=mImagesUrl;
+        this.mOwnername=ownername;
         this.mType = mType;
         this.mTitle = mTitle;
         this.mPrice = mPrice;
         this.mDescription = mDescription;
-        this.mProperties = mProperties;
+
     }
-    public String getmImagesUrl() {
+
+    public String getmOwnername() {
+        return mOwnername;
+    }
+
+    public String[] getmImagesUrl() {
         return mImagesUrl;
     }
     public String getmType() {
@@ -42,7 +49,5 @@ public class DataModelAdds {
         return mDescription;
     }
 
-    public HashMap<String, String> getmProperties() {
-        return mProperties;
-    }
+
 }

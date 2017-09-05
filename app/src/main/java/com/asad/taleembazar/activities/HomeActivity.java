@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.View;
@@ -42,7 +43,7 @@ import java.util.HashMap;
 
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,CallBack {
     private static NavigationView navigationView;
     private DrawerLayout drawer;
     private RecyclerView recyclerView;
@@ -64,7 +65,8 @@ public class HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         initializeSources();
         contactList = new ArrayList<HashMap<String, String>>();
-getpost obj=new getpost();
+        getpost obj=new getpost();
+        obj.setCallback(this);
         obj.execute();
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         submitaddbutton = (FloatingActionButton) findViewById(R.id.submitadd_toggle_button);
@@ -76,7 +78,7 @@ getpost obj=new getpost();
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
         textviewOfHeader();
-        homeItems();
+
         //rana arslan
         submitaddbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +167,7 @@ getpost obj=new getpost();
         layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter = new RecyclerviewForHome(this);
+        adapter = new RecyclerviewForHome(this,contactList);
         recyclerView.setAdapter(adapter);
 
     }
@@ -182,9 +184,16 @@ getpost obj=new getpost();
         DataSourceWrapper.initDatasources(arrayList);
     }
 
+    @Override
+    public void getValue(Boolean bol) {
+        if (bol)
+        homeItems();
+    }
+
     private class getpost extends AsyncTask<String, Void, String> {
         StringBuilder sb = new StringBuilder();
         String url = "http://taleembazaar.com/getposts.php";
+        CallBack mcallBack;
 
 
         @Override
@@ -267,6 +276,7 @@ getpost obj=new getpost();
 
 
                     }
+                    mcallBack.getValue(true);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -277,6 +287,13 @@ getpost obj=new getpost();
             }
 
 
+
+        }
+        public void setCallback(CallBack callback)
+        {
+
+
+            mcallBack=callback;
         }
     }
 }

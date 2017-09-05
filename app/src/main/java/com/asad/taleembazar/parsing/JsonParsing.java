@@ -47,9 +47,9 @@ public class JsonParsing {
 
                 }
             }
-         return mDataModelAdds =new DataModelAdds(jsonObject.getString(TAG_IMAGE_URL),jsonObject.getString(TAG_TYPE)
-                 ,jsonObject.getString(TAG_TITLE), jsonObject.getString(TAG_DESCRIPTION),
-                 jsonObject.getString(TAG_PRICE),myhashmap);
+         return null;// mDataModelAdds =new DataModelAdds(jsonObject.getString(TAG_IMAGE_URL),jsonObject.getString(TAG_TYPE)
+                 //,jsonObject.getString(TAG_TITLE), jsonObject.getString(TAG_DESCRIPTION),
+                 //jsonObject.getString(TAG_PRICE),myhashmap);
 
     }
 

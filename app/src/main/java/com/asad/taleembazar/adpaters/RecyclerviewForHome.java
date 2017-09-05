@@ -12,6 +12,10 @@ import android.widget.TextView;
 import com.asad.taleembazar.R;
 
 import com.asad.taleembazar.activities.SelectCategoriesActivity;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -27,10 +31,13 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
     private static final int NORMAL_VIEW=2312;
     private static final int FIRST_VIEW=42;
     private Context context;
+    private ArrayList<HashMap<String,String>> arrayList;
+    private String url;
 
-    public RecyclerviewForHome(Context context)
+    public RecyclerviewForHome(Context context, ArrayList<HashMap<String,String>> myarraylist)
     {
         this.context=context;
+        this.arrayList=myarraylist;
 
 
     }
@@ -51,7 +58,35 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
 
     @Override
     public void onBindViewHolder(RecyclerviewForHome.Holder holder, int position) {
-        if(position<1 || position>=BOUND) return;
+        if(position<1 || position>=arrayList.size())
+        {
+            for(int i=0;i<arrayList.size();i++)
+            {
+                HashMap<String,String> myhashmap=arrayList.get(i);
+                if (i==0||i%2==0)
+                {
+                    holder.firstpricetx1.setText(myhashmap.get("adsprice"));
+                    Picasso.with(context)
+                            .load(myhashmap.get("adsimg1"))
+                            .centerCrop()
+                            .placeholder(R.drawable.uploadprofile)
+                            .into(holder.firstimg1);
+                }
+                else
+                {
+                    holder.secondpricetx2.setText(myhashmap.get("adsprice"));
+                    Picasso.with(context)
+                            .load(myhashmap.get("adsimg1"))
+                            .centerCrop()
+                            .placeholder(R.drawable.uploadprofile)
+                            .into(holder.secondimg2);
+
+                }
+
+            }
+
+
+        }
        if(position==1) {
 
 
@@ -62,7 +97,7 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
 
     @Override
     public int getItemCount() {
-        return BOUND;
+        return arrayList.size();
     }
 
     @Override
@@ -75,8 +110,8 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
     }
 
     public static class Holder extends RecyclerView.ViewHolder
-    { ImageView img1,img2;
-        TextView tx1,tx2,tx3,tx4;
+    { ImageView firstimg1,secondimg2;
+        TextView firstpricetx1,secondpricetx2;
         TextView tx1cat,tx2cat,tx3cat,tx4cat,tx5cat,tx6cat,tx7cat,tx8cat;
         Context con=itemView.getContext();
         Intent intent=new Intent(con,SelectCategoriesActivity.class);
@@ -150,12 +185,11 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
 
                 return;
             }
-                img1 = (ImageView) itemView.findViewById(R.id.irst_imageview);
-                img2 = (ImageView) itemView.findViewById(R.id.snd_imageview);
-                tx1 = (TextView) itemView.findViewById(R.id.firstprice_textview);
-                tx2 = (TextView) itemView.findViewById(R.id.scndprice_textview);
-                tx3 = (TextView) itemView.findViewById(R.id.more_items);
-                tx4 = (TextView) itemView.findViewById(R.id.item_name);
+                firstimg1 = (ImageView) itemView.findViewById(R.id.irst_imageview);
+                secondimg2 = (ImageView) itemView.findViewById(R.id.snd_imageview);
+                firstpricetx1 = (TextView) itemView.findViewById(R.id.firstprice_textview);
+                secondpricetx2 = (TextView) itemView.findViewById(R.id.scndprice_textview);
+
 
 
 
