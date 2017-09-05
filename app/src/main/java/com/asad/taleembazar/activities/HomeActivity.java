@@ -249,6 +249,7 @@ getpost obj=new getpost();
                         // adding each child node to HashMap key => value
                         contact.put("cid", cid);
                         contact.put("addtype", addtype);
+                        contact.put("adsprice", adsprice);
                         contact.put("adsimg1", adsimg1);
                         contact.put("adsimg2", adsimg2);
 
