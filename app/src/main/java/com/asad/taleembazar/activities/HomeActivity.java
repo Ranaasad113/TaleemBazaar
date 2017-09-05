@@ -63,7 +63,7 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        initializeSources();
+        //initializeSources();
         contactList = new ArrayList<HashMap<String, String>>();
         getpost obj=new getpost();
         obj.setCallback(this);
@@ -176,6 +176,8 @@ public class HomeActivity extends AppCompatActivity
         Intent intent = new Intent(this, SubmitAddActivity.class);
         startActivity(intent);
     }
+
+
 
     private void initializeSources() {
         ArrayList<String> arrayList = new ArrayList<>();
