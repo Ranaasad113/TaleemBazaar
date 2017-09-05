@@ -1,86 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/hotadds_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
     android:orientation="vertical"
-    android:id="@+id/hotadds_layout"
     >
-    <android.support.v7.widget.CardView android:id="@+id/card_view_for_my_account"
-    android:background="@color/colorPrimary"
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view_for_my_account"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="5dp"
+        android:background="@color/colorPrimary"
     card_view:cardCornerRadius="2dp"
     card_view:cardElevation="4dp"
     card_view:cardMaxElevation="6dp"
-    card_view:contentPadding="10dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-       >
+        card_view:contentPadding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-        <ImageView
+            android:orientation="horizontal">
 
-            android:id="@+id/irst_imageview"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="200dp"
-            android:paddingRight="10dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:src="@drawable/uploadprofile"
-            />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/irstimageview"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/uploadprofile" />
 
-        <ImageView
-
-            android:id="@+id/snd_imageview"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_weight="1"
-            android:paddingLeft="5dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:src="@drawable/uploadprofile"
-            />
-
-    </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
         <TextView
+            android:id="@+id/firstusertextview"
             android:layout_width="match_parent"
-            android:id="@+id/firstprice_textview"
             android:layout_height="wrap_content"
-            android:text="price"
-            android:layout_weight="1"
-            android:textColor="@color/colorblack"
-            android:textSize="15dp"
             android:paddingLeft="20dp"
             android:paddingTop="1dp"
-            />
-        <TextView android:layout_width="match_parent"
-            android:id="@+id/scndprice_textview"
-            android:layout_height="wrap_content"
             android:text="price"
-            android:layout_weight="1"
             android:textColor="@color/colorblack"
-            android:textSize="15dp"
-            android:paddingLeft="20dp"
-            android:paddingTop="1dp"
+            android:textSize="10dp"
+            android:textStyle="bold"
             />
-</LinearLayout>
+
+        <TextView
+            android:id="@+id/firstpricetextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="price"
+            android:textColor="@color/colorblack"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/scndpricetextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:text="price"
+            android:textColor="@color/colorblack"
+            android:textSize="10dp"
+            />
+    </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>
 </LinearLayout>

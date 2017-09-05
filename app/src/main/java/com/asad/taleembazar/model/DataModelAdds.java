@@ -1,7 +1,5 @@
 package com.asad.taleembazar.model;
 
-import java.util.HashMap;
-
 /**
  *
  * Created by asad on 5/18/17.
@@ -16,12 +14,19 @@ public class DataModelAdds {
     private String[] mImagesUrl=new String[4];
     private String mOwnername;
     private String mLocation;
-    public DataModelAdds(String[] mImagesUrl,String ownername, String mType, String mTitle, String mPrice, String mDescription ) {
+    private String mMobilenum;
+
+
+    public DataModelAdds(String[] mImagesUrl, String ownername, String mType, String mTitle,
+                         String mPrice, String mDescription, String location, String mobilenum) {
         this.mImagesUrl=mImagesUrl;
         this.mOwnername=ownername;
         this.mType = mType;
         this.mTitle = mTitle;
         this.mPrice = mPrice;
+        this.mMobilenum = mobilenum;
+
+        this.mLocation = location;
         this.mDescription = mDescription;
 
     }
@@ -30,6 +35,13 @@ public class DataModelAdds {
         return mOwnername;
     }
 
+    public String getmLocation() {
+        return mLocation;
+    }
+
+    public String getmMobilenum() {
+        return mMobilenum;
+    }
     public String[] getmImagesUrl() {
         return mImagesUrl;
     }

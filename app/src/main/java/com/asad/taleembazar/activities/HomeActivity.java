@@ -4,28 +4,30 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.telecom.Call;
-import android.util.Log;
-import android.view.MenuInflater;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.asad.taleembazar.CallBack;
 import com.asad.taleembazar.R;
 import com.asad.taleembazar.adpaters.RecyclerviewForHome;
+import com.asad.taleembazar.model.DataModelAdds;
 import com.asad.taleembazar.model.DataSourceWrapper;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,17 +45,17 @@ import java.util.HashMap;
 
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,CallBack {
+        implements NavigationView.OnNavigationItemSelectedListener, CallBack, ClickCallback {
     private static NavigationView navigationView;
+    JSONArray contacts = null;
+    // Hashmap for ListView
+    ArrayList<DataModelAdds> contactList;
     private DrawerLayout drawer;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private FloatingActionButton submitaddbutton;
-    JSONArray contacts = null;
-
-    // Hashmap for ListView
-    ArrayList<HashMap<String, String>> contactList;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +64,10 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
         setSupportActionBar(toolbar);
         //initializeSources();
-        contactList = new ArrayList<HashMap<String, String>>();
+        contactList = new ArrayList<DataModelAdds>();
         getpost obj=new getpost();
         obj.setCallback(this);
         obj.execute();
@@ -167,7 +170,7 @@ public class HomeActivity extends AppCompatActivity
         layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter = new RecyclerviewForHome(this,contactList);
+        adapter = new RecyclerviewForHome(this, contactList, this);
         recyclerView.setAdapter(adapter);
 
     }
@@ -188,8 +191,19 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void getValue(Boolean bol) {
-        if (bol)
-        homeItems();
+        if (bol) {
+            progressBar.setVisibility(View.GONE);
+            homeItems();
+        }
+    }
+
+    @Override
+    public void takeValue(DataModelAdds dataModelAdds) {
+        String data = new Gson().toJson(dataModelAdds);
+        DataModelAdds dataModelAdds1 = dataModelAdds;
+        Intent intent = new Intent(HomeActivity.this, ShowAddActivity.class);
+        intent.putExtra("object", data);
+        startActivity(intent);
     }
 
     private class getpost extends AsyncTask<String, Void, String> {
@@ -253,28 +267,18 @@ public class HomeActivity extends AppCompatActivity
                         String adsdesc = c.getString("adsdesc");
                         String mobnum = c.getString("mobnum");
                         String adsloc = c.getString("adsloc");
+                        String adtitle = c.getString("adstitle");
 
                         String addowner = c.getString("addowner");
                         HashMap<String, String> contact = new HashMap<String, String>();
 
                         // adding each child node to HashMap key => value
-                        contact.put("cid", cid);
-                        contact.put("addtype", addtype);
-                        contact.put("adsprice", adsprice);
-                        contact.put("adsimg1", adsimg1);
-                        contact.put("adsimg2", adsimg2);
 
-                        contact.put("adsimg3", adsimg3);
-                        contact.put("adsimg4", adsimg4);
-
-                        contact.put("adsdesc", adsdesc);
-                        contact.put("mobnum", mobnum);
-                        contact.put("adsloc", adsloc);
-                        contact.put("addowner", addowner);
 
 
                         // adding contact to contact list
-                        contactList.add(contact);
+                        contactList.add(new DataModelAdds(new String[]{adsimg1, adsimg2, adsimg3,
+                                adsimg4}, addowner, addtype, adtitle, adsprice, adsdesc, adsloc, mobnum));
 
 
                     }

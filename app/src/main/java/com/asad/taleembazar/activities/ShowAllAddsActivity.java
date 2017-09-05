@@ -2,14 +2,20 @@ package com.asad.taleembazar.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.asad.taleembazar.CallBack;
 import com.asad.taleembazar.R;
+import com.asad.taleembazar.adpaters.ShowAllAddsAdapter;
+import com.asad.taleembazar.model.DataModelAdds;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,28 +33,61 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class ShowAllAddsActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
-String cat;
-    JSONArray contacts = null;
-
+public class ShowAllAddsActivity extends AppCompatActivity implements CallBack, ClickCallback {
     // Hashmap for ListView
-    ArrayList<HashMap<String, String>> contactList;
+    ArrayList<DataModelAdds> contactList;
+    private RecyclerView recyclerView;
+    private String cat;
+    private RecyclerView.Adapter showAllAddsAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ProgressBar progressBar;
+    private JSONArray contacts = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_alladds_layout);
-        contactList = new ArrayList<HashMap<String, String>>();
+        progressBar = (ProgressBar) findViewById(R.id.progressbaradds);
+        contactList = new ArrayList<DataModelAdds>();
         Intent i=getIntent();
         Bundle b=i.getExtras();
         cat=b.getString("Categorie");
-getpostbycategories obj=new getpostbycategories();
+        getpostbycategories obj = new getpostbycategories();
+        obj.setCallback(this);
         obj.execute();
 
     }
+
+    @Override
+    public void getValue(Boolean bol) {
+        if (bol) {
+            progressBar.setVisibility(View.GONE);
+            //Toast.makeText(getApplicationContext(), contactList.size(), Toast.LENGTH_SHORT).show();
+            setAdapter();
+        }
+    }
+
+    private void setAdapter() {
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerviewallads);
+        layoutManager = new GridLayoutManager(this, 1);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        showAllAddsAdapter = new ShowAllAddsAdapter(this, contactList, this);
+        recyclerView.setAdapter(showAllAddsAdapter);
+    }
+
+    @Override
+    public void takeValue(DataModelAdds dataModelAdds) {
+        String data = new Gson().toJson(dataModelAdds);
+        DataModelAdds dataModelAdds1 = dataModelAdds;
+        Intent intent = new Intent(ShowAllAddsActivity.this, ShowAddActivity.class);
+        intent.putExtra("object", data);
+        startActivity(intent);
+
+
+    }
+
     private class getpostbycategories extends AsyncTask<String, Void, String> {
         StringBuilder sb = new StringBuilder();
         String url = "http://taleembazaar.com/getpostbycategories.php";
@@ -102,7 +141,7 @@ getpostbycategories obj=new getpostbycategories();
 
                     contacts = jsonObj.getJSONArray("Post_Data");
 
-                    // looping through All Contacts
+
                     for (int i = 0; i < contacts.length(); i++) {
                         JSONObject c = contacts.getJSONObject(i);
 
@@ -116,28 +155,18 @@ getpostbycategories obj=new getpostbycategories();
                         String adsdesc = c.getString("adsdesc");
                         String mobnum = c.getString("mobnum");
                         String adsloc = c.getString("adsloc");
+                        String adtitle = c.getString("adstitle");
 
                         String addowner = c.getString("addowner");
-                        HashMap<String, String> contact = new HashMap<String, String>();
+
 
                         // adding each child node to HashMap key => value
-                        contact.put("cid", cid);
-                        contact.put("addtype", addtype);
-                        contact.put("adsprice", adsprice);
-                        contact.put("adsimg1", adsimg1);
-                        contact.put("adsimg2", adsimg2);
 
-                        contact.put("adsimg3", adsimg3);
-                        contact.put("adsimg4", adsimg4);
-
-                        contact.put("adsdesc", adsdesc);
-                        contact.put("mobnum", mobnum);
-                        contact.put("adsloc", adsloc);
-                        contact.put("addowner", addowner);
 
 
                         // adding contact to contact list
-                        contactList.add(contact);
+                        contactList.add(new DataModelAdds(new String[]{adsimg1, adsimg2, adsimg3,
+                                adsimg4}, addowner, addtype, adtitle, adsprice, adsdesc, adsloc, mobnum));
 
 
                     }

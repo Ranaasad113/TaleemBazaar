@@ -1,5 +1,6 @@
 package com.asad.taleembazar.adpaters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.asad.taleembazar.R;
+import com.asad.taleembazar.activities.ClickCallback;
+import com.asad.taleembazar.model.DataModelAdds;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -18,11 +22,15 @@ import java.util.ArrayList;
  */
 
 public class ShowAllAddsAdapter extends RecyclerView.Adapter<ShowAllAddsAdapter.Holder> {
-    private ArrayList<String> arrayList=new ArrayList<>();
-    private callback Clicklistener;
+    private ArrayList<DataModelAdds> arrayList = new ArrayList<>();
+    private ClickCallback clicklistener;
+    private Context context;
+    private DataModelAdds dataModelAdds;
 
-    public ShowAllAddsAdapter(ArrayList<String> arrayList) {
+    public ShowAllAddsAdapter(Context context, ArrayList<DataModelAdds> arrayList, ClickCallback clickCallback) {
         this.arrayList = arrayList;
+        this.context = context;
+        this.clicklistener = clickCallback;
     }
 
     @Override
@@ -34,30 +42,38 @@ public class ShowAllAddsAdapter extends RecyclerView.Adapter<ShowAllAddsAdapter.
     @Override
     public void onBindViewHolder(ShowAllAddsAdapter.Holder holder, int position) {
 
+
+        dataModelAdds = arrayList.get(position);
+        holder.usernametextview.setText("asad");
+        holder.pricetextview.setText(dataModelAdds.getmPrice() + " Rs");
+        Picasso.with(context)
+                .load(dataModelAdds.getmImagesUrl()[0])
+                .fit()
+                .placeholder(R.drawable.uploadprofile)
+                .into(holder.imageview);
+
+
     }
 
 
-    public void setOnClick(callback onClick)
-    {
-        Clicklistener=onClick;
-    }
     @Override
     public int getItemCount() {
         return arrayList.size();
     }
-    public  class Holder extends RecyclerView.ViewHolder implements  View.OnClickListener
-    {
+
+    public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageview;
         TextView usernametextview;
         TextView pricetextview;
         LinearLayout clickadd;
 
-        public Holder(View itemView) {
+        public Holder(final View itemView) {
             super(itemView);
-            imageview=(ImageView)itemView.findViewById(R.id.imageview_showalladds);
-            usernametextview=(TextView)itemView.findViewById(R.id.usernametextview_showallads);
-            pricetextview=(TextView)itemView.findViewById(R.id.priceedittxt_submitadd);
-            clickadd=(LinearLayout)itemView.findViewById(R.id.showalladslinear);
+            imageview = (ImageView) itemView.findViewById(R.id.imageviewadds);
+            usernametextview = (TextView) itemView.findViewById(R.id.usernameallads);
+            pricetextview = (TextView) itemView.findViewById(R.id.pricealladds);
+            clickadd = (LinearLayout) itemView.findViewById(R.id.showalladslinear);
+            clickadd.setOnClickListener(this);
 
 
         }
@@ -65,7 +81,7 @@ public class ShowAllAddsAdapter extends RecyclerView.Adapter<ShowAllAddsAdapter.
 
         @Override
         public void onClick(View v) {
-            Clicklistener.onClick(getAdapterPosition());
+            clicklistener.takeValue(arrayList.get(getAdapterPosition()));
         }
     }
 
