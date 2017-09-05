@@ -3,7 +3,6 @@ package com.asad.taleembazar.networking;
 import android.util.Log;
 
 import com.asad.taleembazar.model.DataModelAdds;
-import com.asad.taleembazar.model.DataModelUser;
 import com.asad.taleembazar.parsing.JsonParsing;
 
 import java.util.ArrayList;
@@ -26,13 +25,6 @@ public class ServerHandler {
         Log.d(TAG, "addsUrl: json is: "+mJson);
         dataModelAdds =mJsonParsing.parseAdJson(mJson);
         return dataModelAdds;
-    }
-    public DataModelUser userUrl(String query) throws Exception
-    {
-        DataModelUser dataModelUser=null;
-        mJsonuser=ConnectionHandler.getJsonfromUrl(query);
-        return dataModelUser;
-
     }
     public ArrayList<String> idsUrl(String query) throws Exception
     {

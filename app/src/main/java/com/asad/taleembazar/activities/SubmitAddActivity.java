@@ -90,7 +90,7 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
         imageviews[0]=(ImageView)findViewById(R.id.first_imageview_submitadd);
         imageviews[1]=(ImageView)findViewById(R.id.second_imageview_submitadd);
         imageviews[2]=(ImageView)findViewById(R.id.third_imageview_submitadd);
-        imageviews[3]=(ImageView)findViewById(R.id.forth_imageview_submitadd);
+        imageviews[3]=(ImageView)findViewById(R.id.forthimageviewsubmitadd);
         imageviews[0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,22 +144,22 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
         else
         {
             for (int i=0;i<imageviews.length;i++)
-            if(imageviews[i].getDrawable().getConstantState().equals(getResources().
-                    getDrawable(R.drawable.uploadprofile).getConstantState()))
-            {
-                Snackbar.make(submitbutton,"Please select all the images",Snackbar.LENGTH_SHORT).show();
-                return;
-            }
-            else
-            {
-                for(int j=0;j<imageviews.length;j++)
+                if(imageviews[i].getDrawable().getConstantState().equals(getResources().
+                        getDrawable(R.drawable.uploadprofile).getConstantState()))
                 {
-                    images[j]=((BitmapDrawable)imageviews[j].getDrawable()).getBitmap();
+                    Snackbar.make(submitbutton,"Please select all the images",Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                else
+                {
+                    for(int j=0;j<imageviews.length;j++)
+                    {
+                        images[j]=((BitmapDrawable)imageviews[j].getDrawable()).getBitmap();
+
+                    }
+
 
                 }
-
-
-            }
             SubmitAddPicturesUpload obj=new SubmitAddPicturesUpload(getApplicationContext(),email,usernum,title,description,location,category,price,images[0],images[1],images[2],images[3]);
         }
     }
@@ -204,7 +204,7 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
                 // First item is disable and it is used for hint
                 if(position > 0){
                     // Notify the selected item text
-                  location=selectedItemText;
+                    location=selectedItemText;
 
                     //this is
                 }
@@ -255,7 +255,7 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
                 // First item is disable and it is used for hint
                 if(position > 0){
                     // Notify the selected item text
-                   category=selectedItemText;
+                    category=selectedItemText;
 
                 }
             }
@@ -268,9 +268,9 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
 
 
     private void intializearraylist() {
-       categoriesfile obj=new categoriesfile();
+        categoriesfile obj=new categoriesfile();
         obj.execute();
-       locationfile obj1=new locationfile();
+        locationfile obj1=new locationfile();
         obj1.setCalback(this);
         obj1.execute();
     }
@@ -285,14 +285,14 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
 
     private void setDialog()
     {
-       dialog = new Dialog(SubmitAddActivity.this);
+        dialog = new Dialog(SubmitAddActivity.this);
 
-       // dialog.requestWindowFeature(Window.F);
+        // dialog.requestWindowFeature(Window.F);
 
         dialog.setContentView(R.layout.customdialog_pickimage);
         dialog.setTitle("Take Image");
 
-       // dialog.getWindow().setBackgroundDrawable(
+        // dialog.getWindow().setBackgroundDrawable(
         //        new ColorDrawable(android.graphics.Color.TRANSPARENT));
         TextView cameraselect=(TextView)dialog.findViewById(R.id.cameratxt);
         TextView gallery=(TextView)dialog.findViewById(R.id.gallerytxt);
@@ -353,8 +353,8 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
         if (bol)
         {
             displaySpinnerLocation();
-        displaySpinnerCategory();
-    }
+            displaySpinnerCategory();
+        }
     }
 
     private class categoriesfile extends AsyncTask<String, Void, String>
@@ -402,30 +402,30 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
 
             String cid="";
             String categories="";
-                try {
-                    JSONObject obj1 = new JSONObject(s);
-                    JSONArray contacts = obj1.getJSONArray("categories_main");
-                    arraylistcategory.add("Category");
-                    int count = 0;
-                    while (count < contacts.length()) {
-                        JSONObject jo = contacts.getJSONObject(count);
-                        cid = jo.getString("cid");
-                        categories = jo.getString("categories");
-                        arraylistcategory.add(cid+" "+categories);
-                        count++;
-
-                    }
+            try {
+                JSONObject obj1 = new JSONObject(s);
+                JSONArray contacts = obj1.getJSONArray("categories_main");
+                arraylistcategory.add("Category");
+                int count = 0;
+                while (count < contacts.length()) {
+                    JSONObject jo = contacts.getJSONObject(count);
+                    cid = jo.getString("cid");
+                    categories = jo.getString("categories");
+                    arraylistcategory.add(cid+" "+categories);
+                    count++;
 
                 }
-                catch (Exception e)
-                {
-                    Toast.makeText(getApplicationContext(),"Unable to Parse Data",Toast.LENGTH_LONG).show();
-                }
-
 
             }
+            catch (Exception e)
+            {
+                Toast.makeText(getApplicationContext(),"Unable to Parse Data",Toast.LENGTH_LONG).show();
+            }
+
 
         }
+
+    }
     private class locationfile extends AsyncTask<String, Void, String>
     {
         StringBuilder sb=new StringBuilder();
@@ -505,4 +505,3 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
 
 
 }
-

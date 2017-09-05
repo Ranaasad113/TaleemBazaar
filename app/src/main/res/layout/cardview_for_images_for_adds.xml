@@ -63,7 +63,7 @@
             />
         <ImageView
 
-            android:id="@+id/forth_imageview_submitadd"
+            android:id="@+id/forthimageviewsubmitadd"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:clickable="true"

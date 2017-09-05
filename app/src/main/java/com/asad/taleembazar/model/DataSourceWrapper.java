@@ -25,19 +25,11 @@ public class DataSourceWrapper {
 
         }
     }
-    public static void initUserDatasources(String username)
-    {
-        datasource=new DataSource();
-        datasource.getUserData(CommonConstant.URL+"?username="+username);
 
-    }
     public DataSource getAddsDataSource(String Category)
     {
         DataSource dataSource=datasorces.get(Category);
         return dataSource;
     }
-    public DataSource getUserDatasource()
-    {
-        return datasource;
-    }
+
 }

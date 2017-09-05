@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/showalladslinear">
     <LinearLayout
         android:orientation="horizontal" android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,8 +13,10 @@
             android:layout_marginLeft="10dp"
             android:layout_width="0dp"
             android:layout_height="125dp"
+            android:id="@+id/imageview_showalladds"
             android:src="@drawable/uploadprofile"
             android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
             />
 
         <LinearLayout
@@ -30,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:text="Asad"
+                android:id="@+id/usernametextview_showallads"
                 />
             <TextView
                 android:layout_weight="1"
@@ -38,7 +42,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="Asad"/>
+                android:text="Asad"
+                android:id="@+id/pricetextview_showalladds"/>
             </LinearLayout>
         </LinearLayout>
 

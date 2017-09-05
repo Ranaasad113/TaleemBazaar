@@ -16,6 +16,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.HomeActivity"
@@ -47,6 +48,7 @@
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity android:name=".activities.SubmitAddActivity" />
         <activity android:name=".activities.PictureUploadingforMAC" />
+        <activity android:name=".activities.ShowAllAddsActivity"></activity>
     </application>
 
 </manifest>

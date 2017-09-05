@@ -1,7 +1,6 @@
 package com.asad.taleembazar.parsing;
 
 import com.asad.taleembazar.model.DataModelAdds;
-import com.asad.taleembazar.model.DataModelUser;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,7 +30,7 @@ public class JsonParsing {
     private static  final String TAG_PASSWORD="password";
     private HashMap<String,String> myhashmap=new HashMap<>();
     private DataModelAdds mDataModelAdds;
-    private DataModelUser mDataModelUser;
+
     public DataModelAdds parseAdJson(String json) throws Exception
     {
             JSONObject jsonObject = new JSONObject(json);
@@ -71,12 +70,7 @@ public class JsonParsing {
             }
             return arrayList;
         }
-        public DataModelUser parseUserjson(String json) throws  Exception
-        {
-            JSONObject jsonObj=new JSONObject(json);
-           return mDataModelUser=new DataModelUser(jsonObj.getString(TAG_USERNAME),jsonObj.getString(TAG_USER_IMAGE_URL),jsonObj.getString(TAG_PASSWORD),jsonObj.getString(TAG_PHONE_NO));
 
-        }
     }
 
 
