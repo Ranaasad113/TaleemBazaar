@@ -1,7 +1,6 @@
 package com.asad.taleembazar.activities;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -9,12 +8,13 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -26,7 +26,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.asad.taleembazar.CallBack;
 import com.asad.taleembazar.R;
 
@@ -34,19 +33,16 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class SubmitAddActivity extends AppCompatActivity implements CallBack {
+    String email, usernum;
     private Toolbar mToolbar;
     private TextInputEditText title_TextInput;
     private TextInputEditText description_TextInput;
@@ -57,7 +53,6 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
     private Spinner selctcategory;
     private Spinner selectlocation;
     private Dialog dialog;
-    String email,usernum;
     private String title;//this is title
     private String description;//this is description
     private String category;//this is category
@@ -171,14 +166,7 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
                 this,R.layout.spinner_item2,arralistlocation){
             @Override
             public boolean isEnabled(int position){
-                if(position == 0)
-                 {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                return position != 0;
             }
             @Override
             public View getDropDownView(int position, View convertView,
@@ -223,14 +211,7 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
                 this,R.layout.spinner_item,arraylistcategory){
             @Override
             public boolean isEnabled(int position){
-                if(position == 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                return position != 0;
             }
             @Override
             public View getDropDownView(int position, View convertView,
@@ -283,6 +264,15 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
         getSupportActionBar().setTitle("Submit Add");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void setDialog()

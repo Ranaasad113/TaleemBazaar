@@ -3,7 +3,6 @@ package com.asad.taleembazar.adpaters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import com.asad.taleembazar.R;
 import com.asad.taleembazar.activities.ClickCallback;
 import com.asad.taleembazar.activities.ShowAllAddsActivity;
 import com.asad.taleembazar.model.DataModelAdds;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -80,17 +78,7 @@ public class RecyclerviewForHome extends RecyclerView.Adapter<RecyclerviewForHom
             String[] data = dataModelAdds.getmImagesUrl();
             Picasso.with(context)
                     .load(data[0])
-                    .into(holder.firstimg1, new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            Log.d("bullhead", "onSuccess: image ;oaded");
-                        }
-
-                        @Override
-                        public void onError() {
-                            Log.d("bullhead", "onError: fick me");
-                        }
-                    });
+                    .into(holder.firstimg1);
 
 
         }

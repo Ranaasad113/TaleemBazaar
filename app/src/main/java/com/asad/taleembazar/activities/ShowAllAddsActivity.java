@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -38,13 +39,13 @@ import java.util.ArrayList;
 public class ShowAllAddsActivity extends AppCompatActivity implements CallBack, ClickCallback {
     // Hashmap for ListView
     ArrayList<DataModelAdds> contactList;
+    String un;
     private RecyclerView recyclerView;
     private String cat;
     private RecyclerView.Adapter showAllAddsAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private ProgressBar progressBar;
     private JSONArray contacts = null;
-    String un;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +87,16 @@ getpostbymyadds obj1=new getpostbymyadds();
         recyclerView.setHasFixedSize(true);
         showAllAddsAdapter = new ShowAllAddsAdapter(this, contactList, this);
         recyclerView.setAdapter(showAllAddsAdapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

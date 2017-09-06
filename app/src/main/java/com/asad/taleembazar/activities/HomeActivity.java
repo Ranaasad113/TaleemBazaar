@@ -27,7 +27,6 @@ import com.asad.taleembazar.CallBack;
 import com.asad.taleembazar.R;
 import com.asad.taleembazar.adpaters.RecyclerviewForHome;
 import com.asad.taleembazar.model.DataModelAdds;
-import com.asad.taleembazar.model.DataSourceWrapper;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -51,13 +50,14 @@ public class HomeActivity extends AppCompatActivity
     JSONArray contacts = null;
     // Hashmap for ListView
     ArrayList<DataModelAdds> contactList;
+    String username, useremail;
     private DrawerLayout drawer;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private FloatingActionButton submitaddbutton;
     private ProgressBar progressBar;
-String username,useremail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //ranaarsi
@@ -206,12 +206,6 @@ String username,useremail;
 
 
 
-    private void initializeSources() {
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("car");
-        arrayList.add("mobiles");
-        DataSourceWrapper.initDatasources(arrayList);
-    }
 
     @Override
     public void getValue(Boolean bol) {

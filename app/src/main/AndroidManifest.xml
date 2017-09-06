@@ -49,7 +49,10 @@
         <activity android:name=".activities.SubmitAddActivity" />
         <activity android:name=".activities.PictureUploadingforMAC" />
         <activity android:name=".activities.ShowAllAddsActivity" />
-        <activity android:name=".activities.ShowAddActivity"></activity>
+        <activity android:name=".activities.ShowAddActivity" />
+        <activity android:name=".activities.AboutusActivity" />
+        <activity android:name=".activities.TermsandPrivacyActivity" />
+        <activity android:name=".activities.ContactusActivity"></activity>
     </application>
 
 </manifest>

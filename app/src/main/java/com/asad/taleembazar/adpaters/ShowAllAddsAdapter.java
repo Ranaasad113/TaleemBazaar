@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +14,8 @@ import com.asad.taleembazar.model.DataModelAdds;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Rana Asad on 9/3/2017.
@@ -44,7 +45,7 @@ public class ShowAllAddsAdapter extends RecyclerView.Adapter<ShowAllAddsAdapter.
 
 
         dataModelAdds = arrayList.get(position);
-        holder.usernametextview.setText("asad");
+        holder.usernametextview.setText(dataModelAdds.getmOwnername());
         holder.pricetextview.setText(dataModelAdds.getmPrice() + " Rs");
         Picasso.with(context)
                 .load(dataModelAdds.getmImagesUrl()[0])
@@ -62,14 +63,14 @@ public class ShowAllAddsAdapter extends RecyclerView.Adapter<ShowAllAddsAdapter.
     }
 
     public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView imageview;
+        CircleImageView imageview;
         TextView usernametextview;
         TextView pricetextview;
         LinearLayout clickadd;
 
         public Holder(final View itemView) {
             super(itemView);
-            imageview = (ImageView) itemView.findViewById(R.id.imageviewadds);
+            imageview = (CircleImageView) itemView.findViewById(R.id.imageviewadds);
             usernametextview = (TextView) itemView.findViewById(R.id.usernameallads);
             pricetextview = (TextView) itemView.findViewById(R.id.pricealladds);
             clickadd = (LinearLayout) itemView.findViewById(R.id.showalladslinear);
