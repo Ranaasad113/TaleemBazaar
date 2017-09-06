@@ -1,6 +1,7 @@
 package com.asad.taleembazar.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -56,7 +57,7 @@ public class HomeActivity extends AppCompatActivity
     private RecyclerView.LayoutManager layoutManager;
     private FloatingActionButton submitaddbutton;
     private ProgressBar progressBar;
-
+String username,useremail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //ranaarsi
@@ -71,6 +72,8 @@ public class HomeActivity extends AppCompatActivity
         getpost obj=new getpost();
         obj.setCallback(this);
         obj.execute();
+
+
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         submitaddbutton = (FloatingActionButton) findViewById(R.id.submitadd_toggle_button);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -138,6 +141,27 @@ public class HomeActivity extends AppCompatActivity
                 Intent intent = new Intent(getApplicationContext(), MyAccountActivity.class);
                 intent.putExtra("PictureUploadingforMAC", "From My Account");
                 startActivity(intent);
+                break;
+            }
+            case R.id.nav_myadd: {
+                SharedPreferences my=HomeActivity.this.getSharedPreferences("LoginInfo.tb",MODE_PRIVATE);
+                username=my.getString("username","");
+                useremail=my.getString("useremail","");
+                if (username.equals("")) {
+                    Toast.makeText(getApplicationContext(), "You Must Have to Login First", Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+
+                    startActivity(intent);
+
+                } else {
+
+
+                    Intent intent = new Intent(getApplicationContext(), ShowAllAddsActivity.class);
+                    intent.putExtra("Categorie", useremail);
+                    startActivity(intent);
+
+                }
                 break;
             }
 

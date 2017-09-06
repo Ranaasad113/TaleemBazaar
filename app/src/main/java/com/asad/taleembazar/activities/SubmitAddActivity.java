@@ -141,26 +141,28 @@ public class SubmitAddActivity extends AppCompatActivity implements CallBack {
             Snackbar.make(submitbutton,"Please specify all the fields",Snackbar.LENGTH_SHORT).show();
 
         }
-        else
-        {
-            for (int i=0;i<imageviews.length;i++)
-                if(imageviews[i].getDrawable().getConstantState().equals(getResources().
-                        getDrawable(R.drawable.uploadprofile).getConstantState()))
-                {
-                    Snackbar.make(submitbutton,"Please select all the images",Snackbar.LENGTH_SHORT).show();
+        else {
+            for (int i = 0; i < imageviews.length; i++)
+                if (imageviews[i].getDrawable().getConstantState().equals(getResources().
+                        getDrawable(R.drawable.uploadprofile).getConstantState())) {
+                    Snackbar.make(submitbutton, "Please select all the images", Snackbar.LENGTH_SHORT).show();
                     return;
-                }
-                else
-                {
-                    for(int j=0;j<imageviews.length;j++)
-                    {
-                        images[j]=((BitmapDrawable)imageviews[j].getDrawable()).getBitmap();
+                } else {
+                    for (int j = 0; j < imageviews.length; j++) {
+                        images[j] = ((BitmapDrawable) imageviews[j].getDrawable()).getBitmap();
 
                     }
 
 
                 }
-            SubmitAddPicturesUpload obj=new SubmitAddPicturesUpload(getApplicationContext(),email,usernum,title,description,location,category,price,images[0],images[1],images[2],images[3]);
+            if (usernum.equals("")) {
+                Toast.makeText(getApplicationContext(), "You must Have to login First", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+
+                startActivity(intent);
+            } else {
+                SubmitAddPicturesUpload obj = new SubmitAddPicturesUpload(getApplicationContext(), email, usernum, title, description, location, category, price, images[0], images[1], images[2], images[3]);
+            }
         }
     }
 
