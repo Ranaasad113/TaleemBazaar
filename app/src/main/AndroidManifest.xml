@@ -52,7 +52,8 @@
         <activity android:name=".activities.ShowAddActivity" />
         <activity android:name=".activities.AboutusActivity" />
         <activity android:name=".activities.TermsandPrivacyActivity" />
-        <activity android:name=".activities.ContactusActivity"></activity>
+        <activity android:name=".activities.ContactusActivity" />
+        <activity android:name=".activities.SearchActivity"></activity>
     </application>
 
 </manifest>

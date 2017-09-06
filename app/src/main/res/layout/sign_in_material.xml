@@ -8,24 +8,28 @@
         android:id="@+id/containeroffragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_horizontal_margin"
         >
-        <TextView android:layout_width="match_parent"
+
+        <TextView
             android:id="@+id/only_for_setting"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:gravity="center"
             android:text=""
             android:textColor="@color/colorblack"
             android:textSize="@dimen/text_size"
 
             />
-        <TextView android:layout_width="match_parent"
+
+        <TextView
             android:id="@+id/no_account_register_textview"
-            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:gravity="center"
             android:paddingTop="16dp"
             android:text="No Account | Register"
@@ -36,23 +40,23 @@
              />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/linearlayout_for_sign_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearlayout_for_sign_in"
-            android:weightSum="1"
             android:layout_above="@+id/no_account_register_textview"
             android:layout_below="@+id/only_for_setting"
             android:gravity="center"
+            android:orientation="vertical"
+            android:weightSum="1"
 
 
             >
 
             <android.support.design.widget.TextInputLayout
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_marginRight="@dimen/left_right_margin_edittext"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/left_right_margin_edittext"
+                android:layout_marginRight="@dimen/left_right_margin_edittext"
                 android:textColorHint="@color/edittext_hnt_color"
 
 
@@ -60,13 +64,13 @@
                 <android.support.design.widget.TextInputEditText
 
 
+                    android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
                     android:ems="10"
-                    android:textSize="@dimen/text_size"
                     android:hint="UserName"
-                    android:id="@+id/username"
+                    android:inputType="textEmailAddress"
+                    android:textSize="@dimen/text_size"
 
 
                     />
@@ -75,23 +79,23 @@
 
 
             <android.support.design.widget.TextInputLayout
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:paddingTop="@dimen/margin_top"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/left_right_margin_edittext"
                 android:layout_marginRight="@dimen/left_right_margin_edittext"
+                android:paddingTop="@dimen/margin_top"
                 android:textColorHint="@color/edittext_hnt_color"
                 app:passwordToggleEnabled="true"
                 >
                 <android.support.design.widget.TextInputEditText
 
+                    android:id="@+id/editText3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:password="true"
                     android:ems="10"
                     android:hint="Password"
-                    android:id="@+id/editText3"
+                    android:inputType="textPassword"
+                    android:password="true"
                     android:textSize="@dimen/text_size"
 
                     />
@@ -99,30 +103,18 @@
 
                 <Button
 
-                    android:layout_marginTop="@dimen/margin_top"
-                    android:layout_marginLeft="@dimen/left_right_margin_edittext"
-                    android:layout_marginRight="@dimen/left_right_margin_edittext"
-                    android:background="@drawable/my_react"
-                    android:layout_height="40dp"
-                    android:layout_width="match_parent"
-                    android:text="Sign In"
-                    android:textSize="@dimen/text_size"
-                    android:elevation="4dp"
                     android:id="@+id/signbtn"
-                    android:textColor="#FFEBEE"/>
-            >
-                <TextView android:layout_width="match_parent"
-                    android:id="@+id/forget_password_textview_1"
-                    android:layout_height="wrap_content"
-                    android:text="@string/forget_password"
-                    android:textColor="@color/colorblack"
-                    android:textSize="@dimen/text_size"
-                    android:layout_marginTop="@dimen/margin_top"
-                    android:gravity="end"
-                    android:layout_marginRight="@dimen/left_right_margin_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="@dimen/left_right_margin_edittext"
+                    android:layout_marginRight="@dimen/left_right_margin_edittext"
+                    android:layout_marginTop="@dimen/margin_top"
+                    android:background="@drawable/my_react"
+                    android:elevation="4dp"
+                    android:text="Sign In"
+                    android:textColor="#FFEBEE"
+                    android:textSize="@dimen/text_size" />
 
-                    />
 
         </LinearLayout>
     </RelativeLayout>

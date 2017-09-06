@@ -157,6 +157,10 @@ public class HomeActivity extends AppCompatActivity
                 Intent intent = new Intent(HomeActivity.this, TermsandPrivacyActivity.class);
                 startActivity(intent);
             }
+            case R.id.nav_search: {
+                Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
             case R.id.nav_myadd: {
                 SharedPreferences my=HomeActivity.this.getSharedPreferences("LoginInfo.tb",MODE_PRIVATE);
                 username=my.getString("username","");
