@@ -1,23 +1,20 @@
 package com.asad.taleembazar.activities;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.Preference;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.ButtonBarLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.asad.taleembazar.CommonConstant;
 import com.asad.taleembazar.R;
 import com.asad.taleembazar.fragments.RegisterFragment;
 
@@ -37,8 +34,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class SignInActivity extends AppCompatActivity implements RegisterFragment.Communication {
-  private Toolbar mToolbar;
     EditText user,pass;
+    private Toolbar mToolbar;
    private Button sign;
     private String username;
     @Override
@@ -70,11 +67,27 @@ public class SignInActivity extends AppCompatActivity implements RegisterFragmen
     });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mToolbar.setTitle("Sign In");
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
     private void settingToolbar() {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Sign In ");
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
     private int clickOnNoAccountTextview()//This Function  is onclick listener for the textview on no account
     {
